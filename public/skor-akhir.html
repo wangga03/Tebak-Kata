@@ -211,7 +211,7 @@
             // Save score to DB
             const username = localStorage.getItem('username');
             if (username) {
-                fetch('/api/update-score', {
+                fetch('/api/leaderboard', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ username, score: parseInt(finalScore) })

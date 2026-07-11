@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById('participant-list');
         if (!container) return;
         try {
-            const res = await fetch('/api/get-participants');
+            const res = await fetch('/api/participants');
             const participants = await res.json();
             
             container.innerHTML = '';

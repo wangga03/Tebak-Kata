@@ -219,7 +219,7 @@ async function registerParticipant() {
             return;
         }
 
-        const res = await fetch('/api/add-participant', {
+        const res = await fetch('/api/participants', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username })

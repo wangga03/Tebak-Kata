@@ -2,7 +2,7 @@
 
 async function getQuestions() {
     try {
-        const response = await fetch('/api/get-questions');
+        const response = await fetch('/api/questions');
         if (!response.ok) throw new Error('Network response was not ok');
         return await response.json();
     } catch (error) {
@@ -17,7 +17,7 @@ async function addQuestion(questionData) {
     if (questionData.levelText.toLowerCase() === 'sulit') level = 3;
 
     try {
-        const response = await fetch('/api/add-question', {
+        const response = await fetch('/api/questions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ async function addQuestion(questionData) {
 
 async function deleteQuestion(id) {
     try {
-        const response = await fetch(`/api/delete-question?id=${id}`, {
+        const response = await fetch(`/api/questions?id=${id}`, {
             method: 'DELETE'
         });
         if (!response.ok) throw new Error('Network response was not ok');

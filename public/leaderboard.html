@@ -154,7 +154,7 @@
 <script>
         document.addEventListener('DOMContentLoaded', async () => {
             try {
-                const res = await fetch('/api/get-leaderboard');
+                const res = await fetch('/api/leaderboard');
                 const players = await res.json();
                 const currentUsername = localStorage.getItem('username');
 

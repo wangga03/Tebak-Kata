@@ -1,4 +1,4 @@
-const conn = require('./db');
+const conn = require('./_db');
 
 module.exports = async function handler(req, res) {
     if (req.method !== 'POST') {

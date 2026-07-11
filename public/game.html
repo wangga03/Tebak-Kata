@@ -315,7 +315,7 @@
             const username = localStorage.getItem('username');
             if (username) {
                 const blob = new Blob([JSON.stringify({ username })], { type: 'application/json' });
-                navigator.sendBeacon('/api/remove-participant', blob);
+                navigator.sendBeacon('/api/participants?action=remove', blob);
             }
         });
     </script>

@@ -245,7 +245,7 @@
 
         async function syncParticipants() {
             try {
-                const res = await fetch('/api/get-participants');
+                const res = await fetch('/api/participants');
                 const participants = await res.json();
                 
                 const othersList = document.getElementById('others-list');
@@ -281,7 +281,7 @@
         function keluarGame() {
             if(currentUsername) {
                 const blob = new Blob([JSON.stringify({ username: currentUsername })], { type: 'application/json' });
-                navigator.sendBeacon('/api/remove-participant', blob);
+                navigator.sendBeacon('/api/participants?action=remove', blob);
                 localStorage.removeItem('username');
             }
             window.location.href = 'username.html';
