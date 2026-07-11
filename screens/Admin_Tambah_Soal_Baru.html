@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tambah Soal Baru - WordFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-tint": "#732ee4",
+                        "secondary": "#735c00",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e6e8ea",
+                        "outline": "#7b7487",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#d2bbff",
+                        "on-error": "#ffffff",
+                        "surface": "#f7f9fb",
+                        "on-primary-fixed": "#25005a",
+                        "on-secondary-fixed": "#231b00",
+                        "primary-container": "#7c3aed",
+                        "background": "#f7f9fb",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-tertiary-fixed-variant": "#8c0053",
+                        "on-primary-fixed-variant": "#5a00c6",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#ffe083",
+                        "inverse-surface": "#2d3133",
+                        "tertiary": "#9b005c",
+                        "primary": "#630ed4",
+                        "on-tertiary-fixed": "#3e0022",
+                        "tertiary-fixed": "#ffd9e4",
+                        "tertiary-container": "#bf2076",
+                        "tertiary-fixed-dim": "#ffb0cd",
+                        "surface-dim": "#d8dadc",
+                        "surface-container-low": "#f2f4f6",
+                        "on-surface-variant": "#4a4455",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-background": "#191c1e",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#6f5900",
+                        "secondary-container": "#fed01b",
+                        "on-surface": "#191c1e",
+                        "surface-variant": "#e0e3e5",
+                        "on-tertiary-container": "#ffdde7",
+                        "surface-container": "#eceef0",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed-dim": "#eec200",
+                        "surface-bright": "#f7f9fb",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#ccc3d8",
+                        "primary-fixed": "#eaddff",
+                        "on-primary-container": "#ede0ff",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#d2bbff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-desktop": "32px",
+                        "base-unit": "4px",
+                        "tile-gap": "8px",
+                        "gutter": "12px",
+                        "margin-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "label-bold": ["Plus Jakarta Sans"],
+                        "tile-text": ["Plus Jakarta Sans"],
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "800"}],
+                        "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "tile-text": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pressed-effect {
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+        }
+        .pressed-effect:active {
+            transform: translateY(2px);
+            box-shadow: none !important;
+        }
+        .tile-shadow {
+            box-shadow: 0 4px 0 0 rgba(0,0,0,0.1);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #ccc3d8;
+            border-radius: 10px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+<div class="max-w-[480px] mx-auto min-h-screen flex flex-col bg-background relative overflow-x-hidden">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky z-40 flex justify-between items-center px-margin-mobile h-16 max-w-[480px] mx-auto shadow-sm dark:shadow-none bg-surface dark:bg-background">
+<div class="flex items-center gap-3">
+<button aria-label="Back" class="transition-transform duration-200 active:scale-95 p-2 hover:bg-surface-container rounded-full">
+<span class="material-symbols-outlined text-on-surface">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold text-primary">Tambah Soal Baru</h1>
+</div>
+<div class="transition-transform duration-200 active:scale-95">
+<div class="w-10 h-10 rounded-full border-2 border-primary-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a creative game administrator, Alex Rivers, in a bright modern studio setting. The lighting is clean and soft-key, highlighting a friendly and intelligent expression. The aesthetic is modern minimalist with a vibrant purple color scheme that matches the WordFlow brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuArz3h2vKcJhdM5mGe2BP5rqsj3VIEKRr5SEej1nfyjKfIlCDVO19t6MPlLATmqfjm3l2W0q8Zo7D708CgMYPgLkQ1p9B_b7GDz58Ub4fSC3r7HaTz0jV4eSIZlpI3oaegx-GGrXprf2mNqV4GIFh0akrKKU6qnM0uawQ9U10fp6cMWX2OHq2ZVftI34y2AKQDepCUSPym5P_98c1URQ4cEszIPf60vHpcZo1bNUdsBuv2MTN6R4Jg"/>
+</div>
+</div>
+</header>
+<main class="flex-1 px-margin-mobile py-8 pb-32">
+<!-- Hero Animation Area -->
+<div class="mb-8 relative rounded-xl overflow-hidden h-32 flex items-center justify-center bg-primary-container text-on-primary-container">
+
+<div class="relative z-10 text-center px-4">
+<p class="font-headline-lg-mobile text-headline-lg-mobile font-extrabold leading-tight">Perkaya Kosakata</p>
+<p class="text-sm opacity-90">Bangun tantangan baru untuk para pemain!</p>
+</div>
+</div>
+<!-- Form Container -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-surface-container-high space-y-8">
+<!-- Question Field -->
+<div class="space-y-2">
+<label class="block font-label-bold text-on-surface-variant px-1" for="question">Pertanyaan</label>
+<div class="relative">
+<textarea class="w-full bg-transparent border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all duration-300 px-1 py-2 text-body-md placeholder:text-outline-variant resize-none" id="question" placeholder="Masukkan pertanyaan teka-teki..." rows="3"></textarea>
+</div>
+<p class="text-xs text-outline px-1">Tip: Gunakan deskripsi yang menarik namun menantang.</p>
+</div>
+<!-- Answer Key Field -->
+<div class="space-y-2">
+<label class="block font-label-bold text-on-surface-variant px-1" for="answer">Kunci Jawaban</label>
+<div class="flex gap-2">
+<div class="relative flex-1">
+<input class="w-full bg-transparent border-b-2 border-outline-variant focus:border-primary focus:ring-0 transition-all duration-300 px-1 py-2 text-body-md font-bold tracking-widest placeholder:font-normal placeholder:tracking-normal placeholder:text-outline-variant" id="answer" placeholder="CONTOH: GAJAH" type="text"/>
+</div>
+<div class="bg-primary-container/10 text-primary p-2 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined" data-weight="fill">spellcheck</span>
+</div>
+</div>
+<p class="text-xs text-outline px-1">Kata harus terdiri dari 3-10 karakter alfabet.</p>
+</div>
+<!-- Difficulty Segment Control -->
+<div class="space-y-3">
+<label class="block font-label-bold text-on-surface-variant px-1">Tingkat Kesulitan</label>
+<div class="flex bg-surface-container-low p-1 rounded-full w-full relative">
+<button class="difficulty-btn flex-1 py-2 px-4 rounded-full text-sm font-bold transition-all duration-300 z-10 bg-primary text-white shadow-sm" data-diff="mudah" onclick="selectDifficulty(this, 'mudah')">Mudah</button>
+<button class="difficulty-btn flex-1 py-2 px-4 rounded-full text-sm font-bold transition-all duration-300 z-10 text-on-surface-variant" data-diff="sedang" onclick="selectDifficulty(this, 'sedang')">Sedang</button>
+<button class="difficulty-btn flex-1 py-2 px-4 rounded-full text-sm font-bold transition-all duration-300 z-10 text-on-surface-variant" data-diff="sulit" onclick="selectDifficulty(this, 'sulit')">Sulit</button>
+</div>
+</div>
+<!-- Category Dropdown -->
+<div class="space-y-2">
+<label class="block font-label-bold text-on-surface-variant px-1">Kategori</label>
+<div class="relative group">
+<select class="w-full appearance-none bg-surface-container-low border-2 border-transparent focus:border-primary-container rounded-xl px-4 py-3 text-body-md pr-10 cursor-pointer transition-all">
+<option value="hewan">🐾 Hewan</option>
+<option value="alam">🌳 Alam</option>
+<option value="teknologi">💻 Teknologi</option>
+<option value="makanan">🍕 Makanan</option>
+<option value="olahraga">⚽ Olahraga</option>
+</select>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
+<span class="material-symbols-outlined">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Submit Button Area -->
+<div class="mt-10 px-2">
+<button class="w-full py-4 bg-primary text-on-primary font-headline-lg-mobile text-lg rounded-2xl shadow-lg shadow-primary/20 flex items-center justify-center gap-3 transition-all duration-200 active:scale-95 hover:brightness-110">
+<span class="material-symbols-outlined" data-weight="fill">save</span>
+<span>Simpan Soal</span>
+</button>
+<p class="text-center text-xs text-outline mt-4">Draft soal akan tersimpan secara otomatis jika koneksi terputus.</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 max-w-[480px] left-1/2 -translate-x-1/2 bg-surface dark:bg-background shadow-[0_-1px_3px_rgba(0,0,0,0.1)] flex justify-around items-center px-2 py-3">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-all duration-200 active:scale-90 hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">videogame_asset</span>
+<span class="font-label-sm text-label-sm">Play</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-all duration-200 active:scale-90 hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="font-label-sm text-label-sm">Review</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container dark:bg-primary text-on-primary-container dark:text-on-primary rounded-xl px-4 py-1 transition-all duration-200 active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings_suggest</span>
+<span class="font-label-sm text-label-sm">Manage</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 transition-all duration-200 active:scale-90 hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+</div>
+<script>
+        function selectDifficulty(element, difficulty) {
+            const buttons = document.querySelectorAll('.difficulty-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-primary', 'text-white', 'shadow-sm');
+                btn.classList.add('text-on-surface-variant');
+            });
+            
+            element.classList.remove('text-on-surface-variant');
+            element.classList.add('bg-primary', 'text-white', 'shadow-sm');
+            
+            // Interaction feedback
+            element.classList.add('scale-95');
+            setTimeout(() => {
+                element.classList.remove('scale-95');
+            }, 100);
+        }
+
+        // Letter transformation for answer key
+        const answerInput = document.getElementById('answer');
+        answerInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.toUpperCase();
+        });
+    </script>
+</body></html>

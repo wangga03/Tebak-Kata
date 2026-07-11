@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>Super Admin Dashboard - WordFlow</title>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <!-- Top AppBar -->
+    <header class="app-bar">
+        <div class="app-bar-content container">
+            <div class="d-flex align-items-center gap-2">
+                <span class="material-symbols-outlined text-primary">menu</span>
+                <div class="d-flex flex-column">
+                    <h1 class="headline-lg-mobile text-primary" style="font-size: 20px; line-height: 1;">Super Admin</h1>
+                    <span class="label-bold text-tertiary uppercase tracking-widest" style="font-size: 10px;">Full Access Control</span>
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="material-symbols-outlined text-primary">notifications</span>
+                <span class="material-symbols-outlined text-primary">account_circle</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container d-flex flex-column pt-24 pb-32">
+        <!-- Dashboard Status -->
+        <div class="dashboard-status mb-6">
+            <div class="d-flex align-items-center gap-3">
+                <div class="status-icon">
+                    <span class="material-symbols-outlined text-white">admin_panel_settings</span>
+                </div>
+                <div>
+                    <p class="label-bold text-on-surface">Super Admin Mode</p>
+                    <p class="text-on-surface-variant" style="font-size: 11px;">You have full permissions</p>
+                </div>
+            </div>
+            <div class="d-flex gap-2 align-items-center">
+                <div class="status-dot"></div>
+                <span class="text-on-surface-variant" style="font-size: 10px; font-weight: 700;">ONLINE</span>
+            </div>
+        </div>
+
+        <!-- View Toggle Control -->
+        <div class="view-toggle mb-8">
+            <button class="toggle-btn" onclick="window.location.href='game.html'">Participant</button>
+            <button class="toggle-btn active">Super Dashboard</button>
+        </div>
+
+        <!-- Management Suite Controls -->
+        <div class="grid-2-cols gap-4 mb-8">
+            <div class="management-tile">
+                <span class="material-symbols-outlined text-primary mb-2">group_manage</span>
+                <span class="label-bold" style="font-size: 13px;">Users</span>
+            </div>
+            <div class="management-tile">
+                <span class="material-symbols-outlined text-tertiary mb-2">monitoring</span>
+                <span class="label-bold" style="font-size: 13px;">Analytics</span>
+            </div>
+        </div>
+
+        <!-- Section Title & Add Action -->
+        <div class="d-flex align-items-center justify-content-between mb-6">
+            <h2 class="headline-lg-mobile text-on-surface" style="font-size: 22px;">Kelola Pertanyaan</h2>
+            <button class="btn-sm btn-secondary d-flex align-items-center gap-1" onclick="window.location.href='tambah_soal.html'">
+                <span class="material-symbols-outlined" style="font-size: 18px;">add_circle</span>
+                Tambah
+            </button>
+        </div>
+
+        <!-- Question List -->
+        <div id="question-list" class="d-flex flex-column gap-4">
+            <!-- Rendered by JS -->
+        </div>
+
+        <!-- Stats Card -->
+        <div class="stats-card mt-8">
+            <div style="position: relative; z-index: 10;">
+                <p class="label-bold mb-2" style="opacity: 0.8;">Database Overview</p>
+                <div class="d-flex align-items-center gap-2">
+                    <h3 id="total-questions" class="headline-xl" style="line-height: 1;">0</h3>
+                    <span class="label-sm" style="opacity: 0.9;">Questions Active</span>
+                </div>
+                <div class="d-flex gap-4 mt-4">
+                    <div class="d-flex flex-column">
+                        <span style="font-size: 10px; opacity: 0.7; font-weight: bold; text-transform: uppercase;">Today</span>
+                        <span class="label-bold">+3 New</span>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <span style="font-size: 10px; opacity: 0.7; font-weight: bold; text-transform: uppercase;">Solved</span>
+                        <span class="label-bold">1.2k Total</span>
+                    </div>
+                </div>
+            </div>
+            <span class="material-symbols-outlined stats-bg-icon">database</span>
+        </div>
+    </main>
+
+    <!-- BottomNavBar -->
+    <nav class="bottom-nav">
+        <div class="bottom-nav-content">
+            <a class="nav-item" href="game.html">
+                <span class="material-symbols-outlined mb-2">videogame_asset</span>
+                <span class="label-sm">Play</span>
+            </a>
+            <a class="nav-item active" href="dashboard.html">
+                <span class="material-symbols-outlined mb-2" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+                <span class="label-sm">Super Admin</span>
+            </a>
+            <a class="nav-item" href="kelola_soal.html">
+                <span class="material-symbols-outlined mb-2">settings_suggest</span>
+                <span class="label-sm">System</span>
+            </a>
+        </div>
+    </nav>
+    <script src="js/db.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        async function renderQuestions() {
+            const list = document.getElementById('question-list');
+            list.innerHTML = '<p style="text-align:center;">Memuat data...</p>';
+            
+            const questions = await getQuestions();
+            document.getElementById('total-questions').innerText = questions.length;
+            
+            list.innerHTML = '';
+            questions.forEach(q => {
+                let badgeClass = 'badge-tertiary';
+                if (q.level === 2) badgeClass = 'badge-secondary';
+                if (q.level === 3) badgeClass = 'badge-primary';
+
+                const item = document.createElement('div');
+                item.className = 'question-item';
+                item.innerHTML = `
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="badge ${badgeClass}">${q.levelText || 'Level ' + q.level}</span>
+                            <span class="text-on-surface-variant" style="font-size: 10px; font-weight: bold; opacity: 0.6;">ID: #${q.id}</span>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="icon-btn text-error bg-error-container-hover" onclick="removeQuestion('${q.id}')">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-column gap-4">
+                        <div class="input-group">
+                            <label>Pertanyaan</label>
+                            <input type="text" value="${q.question}" readonly/>
+                        </div>
+                        <div class="input-group">
+                            <label>Kunci Jawaban</label>
+                            <input class="input-answer" type="text" value="${q.answer}" readonly/>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    input.parentElement.querySelector('label').style.color = 'var(--primary)';
+                });
+                input.addEventListener('blur', () => {
+                    input.parentElement.querySelector('label').style.color = 'var(--on-surface-variant)';
+                });
+            });
+        }
+
+        async function removeQuestion(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus soal ini?')) {
+                await deleteQuestion(id);
+                renderQuestions();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuestions();
+        });
+    </script>
+</body>
+</html>

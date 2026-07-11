@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>WordFlow - Tebak Kata</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#ffdde7",
+                    "secondary-fixed": "#ffe083",
+                    "primary-container": "#7c3aed",
+                    "inverse-surface": "#2d3133",
+                    "surface-tint": "#732ee4",
+                    "error": "#ba1a1a",
+                    "tertiary-fixed-dim": "#ffb0cd",
+                    "on-surface-variant": "#4a4455",
+                    "surface-container": "#eceef0",
+                    "tertiary-fixed": "#ffd9e4",
+                    "secondary-fixed-dim": "#eec200",
+                    "surface-container-high": "#e6e8ea",
+                    "on-tertiary-fixed": "#3e0022",
+                    "on-primary-container": "#ede0ff",
+                    "background": "#f7f9fb",
+                    "surface-variant": "#e0e3e5",
+                    "on-secondary": "#ffffff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed": "#231b00",
+                    "inverse-primary": "#d2bbff",
+                    "primary": "#630ed4",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-primary-fixed": "#25005a",
+                    "tertiary": "#9b005c",
+                    "on-primary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#574500",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-container": "#bf2076",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface": "#f7f9fb",
+                    "on-background": "#191c1e",
+                    "outline-variant": "#ccc3d8",
+                    "primary-fixed": "#eaddff",
+                    "on-tertiary-fixed-variant": "#8c0053",
+                    "secondary": "#735c00",
+                    "on-surface": "#191c1e",
+                    "on-secondary-container": "#6f5900",
+                    "surface-container-low": "#f2f4f6",
+                    "on-error": "#ffffff",
+                    "surface-bright": "#f7f9fb",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed-variant": "#5a00c6",
+                    "secondary-container": "#fed01b",
+                    "primary-fixed-dim": "#d2bbff",
+                    "outline": "#7b7487",
+                    "surface-dim": "#d8dadc"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "tile-gap": "8px",
+                    "base-unit": "4px",
+                    "gutter": "12px",
+                    "margin-desktop": "32px"
+            },
+            "fontFamily": {
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "label-bold": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "tile-text": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "tile-text": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .tile-press {
+            box-shadow: 0 4px 0 0 #4a09a1;
+            transition: all 0.1s ease-out;
+        }
+        
+        .tile-press:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 0 #4a09a1;
+        }
+
+        .letter-slot {
+            background-image: radial-gradient(circle, #ccc3d8 1px, transparent 1px);
+            background-size: 8px 8px;
+        }
+
+        .squishy-button {
+            transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .squishy-button:active {
+            transform: scale(0.95);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-surface border-b border-surface-variant shadow-sm max-w-[480px] mx-auto left-1/2 -translate-x-1/2">
+<div class="flex justify-between items-center px-margin-mobile py-2">
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-surface-container-high transition-colors active:scale-95 duration-100 ease-out rounded-full">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">WordFlow</h1>
+</div>
+<button class="p-2 hover:bg-surface-container-high transition-colors active:scale-95 duration-100 ease-out rounded-full">
+<span class="material-symbols-outlined text-primary">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 mt-16 mb-20 px-margin-mobile pt-8 max-w-[480px] mx-auto w-full overflow-y-auto">
+<!-- Category Badge & Question Card -->
+<section class="mb-8">
+<div class="bg-surface-container-lowest border border-surface-variant rounded-xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
+<!-- Secondary Color Badge -->
+<div class="absolute top-0 right-0 bg-secondary-container text-on-secondary-container px-4 py-1 rounded-bl-xl font-label-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">restaurant</span>
+<span>Level 1</span>
+</div>
+<h2 class="text-on-surface-variant font-label-bold uppercase tracking-widest text-[11px] mb-2">Pertanyaan</h2>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Buah apa yang warnanya merah dan manis?</p>
+</div>
+</section>
+<!-- Answer Slots -->
+<section class="flex justify-center gap-tile-gap mb-12" id="answer-grid">
+<div class="w-16 h-20 rounded-xl border-b-4 border-2 border-outline-variant bg-surface-container-low flex items-center justify-center font-tile-text text-tile-text text-primary shadow-inner">
+<!-- Empty State -->
+</div>
+<div class="w-16 h-20 rounded-xl border-b-4 border-2 border-outline-variant bg-surface-container-low flex items-center justify-center font-tile-text text-tile-text text-primary shadow-inner"></div>
+<div class="w-16 h-20 rounded-xl border-b-4 border-2 border-outline-variant bg-surface-container-low flex items-center justify-center font-tile-text text-tile-text text-primary shadow-inner"></div>
+<div class="w-16 h-20 rounded-xl border-b-4 border-2 border-outline-variant bg-surface-container-low flex items-center justify-center font-tile-text text-tile-text text-primary shadow-inner"></div>
+</section>
+<!-- Letter Pool -->
+<section class="mb-10">
+<h3 class="text-on-surface-variant font-label-bold text-center mb-4 text-label-sm uppercase tracking-widest">Pilih Huruf</h3>
+<div class="flex flex-wrap justify-center gap-tile-gap px-2" id="letter-pool">
+<button class="tile-press w-14 h-14 bg-surface-container-lowest border-2 border-primary-fixed-dim rounded-xl flex items-center justify-center font-tile-text text-tile-text text-primary squishy-button">A</button>
+<button class="tile-press w-14 h-14 bg-surface-container-lowest border-2 border-primary-fixed-dim rounded-xl flex items-center justify-center font-tile-text text-tile-text text-primary squishy-button">P</button>
+<button class="tile-press w-14 h-14 bg-surface-container-lowest border-2 border-primary-fixed-dim rounded-xl flex items-center justify-center font-tile-text text-tile-text text-primary squishy-button">E</button>
+<button class="tile-press w-14 h-14 bg-surface-container-lowest border-2 border-primary-fixed-dim rounded-xl flex items-center justify-center font-tile-text text-tile-text text-primary squishy-button">L</button>
+<button class="tile-press w-14 h-14 bg-surface-container-lowest border-2 border-primary-fixed-dim rounded-xl flex items-center justify-center font-tile-text text-tile-text text-primary squishy-button">M</button>
+<button class="tile-press w-14 h-14 bg-surface-container-lowest border-2 border-primary-fixed-dim rounded-xl flex items-center justify-center font-tile-text text-tile-text text-primary squishy-button">S</button>
+<button class="tile-press w-14 h-14 bg-surface-container-lowest border-2 border-primary-fixed-dim rounded-xl flex items-center justify-center font-tile-text text-tile-text text-primary squishy-button">B</button>
+<button class="tile-press w-14 h-14 bg-surface-container-lowest border-2 border-primary-fixed-dim rounded-xl flex items-center justify-center font-tile-text text-tile-text text-primary squishy-button">U</button>
+</div>
+</section>
+<!-- Check Answer Button -->
+<section class="px-margin-mobile">
+<button class="w-full py-4 bg-secondary-container text-on-secondary-container font-headline-lg-mobile text-xl rounded-2xl shadow-[0_6px_0_0_#9a7e00] active:shadow-[0_1px_0_0_#9a7e00] active:translate-y-[5px] transition-all duration-75 uppercase tracking-wide">
+                Cek Jawaban
+            </button>
+</section>
+<!-- Micro-Interaction Hint -->
+<p class="text-center mt-6 text-on-surface-variant font-label-sm opacity-60">Tekan huruf untuk memasukkan kata</p>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 max-w-[480px] left-1/2 -translate-x-1/2 rounded-t-xl bg-surface-container-lowest border-t border-surface-variant shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+<div class="flex justify-around items-center h-16 w-full px-8">
+<!-- Active Navigation -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-1 active:scale-95 transition-transform duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">videogame_asset</span>
+<span class="font-label-sm text-label-sm">Play</span>
+</a>
+<!-- Inactive Navigation -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-6 py-1 active:scale-95 transition-transform duration-200 hover:bg-surface-container-high" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-sm text-label-sm">Admin</span>
+</a>
+</div>
+</nav>
+<script>
+        // Simple micro-interaction for letter selection
+        const letters = document.querySelectorAll('#letter-pool button');
+        const slots = document.querySelectorAll('#answer-grid div');
+        let currentSlot = 0;
+
+        letters.forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (currentSlot < slots.length) {
+                    const letter = btn.innerText;
+                    slots[currentSlot].innerText = letter;
+                    slots[currentSlot].classList.add('bg-white', 'border-primary', 'shadow-md');
+                    slots[currentSlot].classList.remove('bg-surface-container-low', 'shadow-inner');
+                    
+                    // Temporary disable used letter
+                    btn.style.opacity = '0.3';
+                    btn.style.pointerEvents = 'none';
+                    
+                    currentSlot++;
+                }
+            });
+        });
+
+        // Reset functionality on slot click
+        slots.forEach((slot, index) => {
+            slot.addEventListener('click', () => {
+                if (slot.innerText !== "") {
+                    const letterToRestore = slot.innerText;
+                    letters.forEach(btn => {
+                        if (btn.innerText === letterToRestore && btn.style.opacity === '0.3') {
+                            btn.style.opacity = '1';
+                            btn.style.pointerEvents = 'auto';
+                        }
+                    });
+                    
+                    slot.innerText = "";
+                    slot.classList.remove('bg-white', 'border-primary', 'shadow-md');
+                    slot.classList.add('bg-surface-container-low', 'shadow-inner');
+                    
+                    // Move current slot pointer back if needed
+                    if (index < currentSlot) {
+                        currentSlot = index;
+                    }
+                }
+            });
+        });
+    </script>
+</body></html>

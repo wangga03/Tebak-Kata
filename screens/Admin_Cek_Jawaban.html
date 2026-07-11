@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WordFlow Admin - Review Portal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f7f9fb;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .tile-shadow {
+            box-shadow: 0 4px 0 0 rgba(115, 46, 228, 0.2);
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(204, 195, 216, 0.4);
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#bf2076",
+                        "inverse-on-surface": "#eff1f3",
+                        "on-surface-variant": "#4a4455",
+                        "surface-bright": "#f7f9fb",
+                        "tertiary-fixed": "#ffd9e4",
+                        "on-tertiary-fixed-variant": "#8c0053",
+                        "outline-variant": "#ccc3d8",
+                        "primary-fixed": "#eaddff",
+                        "on-surface": "#191c1e",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#735c00",
+                        "on-primary-fixed-variant": "#5a00c6",
+                        "secondary-fixed": "#ffe083",
+                        "secondary-container": "#fed01b",
+                        "error-container": "#ffdad6",
+                        "surface": "#f7f9fb",
+                        "surface-container-high": "#e6e8ea",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#eec200",
+                        "on-error": "#ffffff",
+                        "on-tertiary-container": "#ffdde7",
+                        "on-secondary-fixed": "#231b00",
+                        "on-primary-fixed": "#25005a",
+                        "inverse-primary": "#d2bbff",
+                        "surface-dim": "#d8dadc",
+                        "tertiary": "#9b005c",
+                        "outline": "#7b7487",
+                        "inverse-surface": "#2d3133",
+                        "surface-container": "#eceef0",
+                        "on-secondary-container": "#6f5900",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f2f4f6",
+                        "primary-fixed-dim": "#d2bbff",
+                        "on-secondary-fixed-variant": "#574500",
+                        "on-background": "#191c1e",
+                        "background": "#f7f9fb",
+                        "surface-variant": "#e0e3e5",
+                        "surface-tint": "#732ee4",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb0cd",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary-fixed": "#3e0022",
+                        "primary": "#630ed4",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-container": "#7c3aed",
+                        "on-primary-container": "#ede0ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "12px",
+                        "tile-gap": "8px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "base-unit": "4px"
+                    },
+                    "fontFamily": {
+                        "headline-xl": ["Plus Jakarta Sans"],
+                        "body-md": ["Plus Jakarta Sans"],
+                        "tile-text": ["Plus Jakarta Sans"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "label-sm": ["Plus Jakarta Sans"],
+                        "label-bold": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"]
+                    },
+                    "fontSize": {
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                        "tile-text": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                        "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface dark:bg-inverse-surface shadow-sm">
+<div class="flex items-center gap-4">
+<button class="p-2 text-primary dark:text-inverse-primary hover:bg-surface-variant/50 rounded-full transition-transform duration-150 active:scale-95">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-inverse-primary font-extrabold tracking-tight">WordFlow</h1>
+</div>
+<div class="flex items-center gap-3">
+<div class="hidden md:flex items-center bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full">
+<span class="material-symbols-outlined text-[18px] mr-1" data-icon="verified_user">verified_user</span>
+<span class="font-label-bold">Role: Admin</span>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female administrator with a friendly expression. She is in a brightly lit, modern office environment with soft focus greenery in the background. The aesthetic is clean and high-key, using a palette of soft whites and deep purples to match the WordFlow brand. The lighting is flattering and natural." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQGL9JNkdairRx7gjjPPEbA4NZsUYqelckIaVzuFx0EtsQOMJCWd0qauJAp3MwHgKYJrNgjAFl_xw7ohTQ1jtcgh7uzncAQQDvvvA1Ig8Z7hcO7Q9WWdDc6c_hM4HlWFoHqwdn7IksflieqxiEKdI7f6dxd_6p9f7D2MeYiIc1nTneVX0cS7fYE9aq0FHrBNZzEV5MIp_ySsk0hNbyfZRMgGADUxBNtC5e5L80-6iyUywpPWY7cwI"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-24 px-4 max-w-[480px] mx-auto">
+<!-- Welcome Section -->
+<section class="mb-8">
+<div class="flex items-center justify-between mb-2">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Review Portal</h2>
+<div class="md:hidden bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full scale-90">
+<span class="font-label-bold text-xs uppercase">Admin</span>
+</div>
+</div>
+<p class="font-body-md text-on-surface-variant">Reviewing official game data and correct answers for the current session.</p>
+</section>
+<!-- Stats Bento Grid (Mini) -->
+<div class="grid grid-cols-2 gap-4 mb-8">
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/30 shadow-sm flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-primary mb-1" data-icon="quiz">quiz</span>
+<span class="text-2xl font-extrabold text-on-surface">24</span>
+<span class="font-label-sm text-on-surface-variant uppercase">Questions</span>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-xl border border-outline-variant/30 shadow-sm flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-tertiary mb-1" data-icon="verified">verified</span>
+<span class="text-2xl font-extrabold text-on-surface">100%</span>
+<span class="font-label-sm text-on-surface-variant uppercase">Verified</span>
+</div>
+</div>
+<!-- Role Banner -->
+<div class="mb-6 p-4 bg-primary-container/10 border border-primary-container/30 rounded-xl flex items-start gap-3">
+<span class="material-symbols-outlined text-primary-container" data-icon="info">info</span>
+<div>
+<p class="font-label-bold text-on-primary-container">View-Only Mode</p>
+<p class="text-sm text-on-surface-variant">You are currently in the Admin review role. Editing or adding new questions is disabled.</p>
+</div>
+</div>
+<!-- Question List -->
+<div class="space-y-6">
+<!-- Question Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/50 shadow-sm overflow-hidden transition-all hover:shadow-md">
+<div class="p-4 flex justify-between items-start border-b border-outline-variant/20 bg-surface-container-low/50">
+<span class="font-label-bold text-primary px-2 py-0.5 rounded bg-primary-fixed">#001</span>
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-sm" data-icon="star">star</span>
+<span class="font-label-sm">Easy</span>
+</div>
+</div>
+<div class="p-5">
+<h3 class="font-headline-lg-mobile text-lg text-on-surface mb-4">A domesticated carnivorous mammal that typically has a long snout and an acute sense of smell.</h3>
+<div class="flex flex-wrap gap-2">
+<div class="w-12 h-14 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-tile-text text-primary">D</div>
+<div class="w-12 h-14 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-tile-text text-primary">O</div>
+<div class="w-12 h-14 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-tile-text text-primary">G</div>
+</div>
+<div class="mt-6 pt-4 border-t border-dashed border-outline-variant/40 flex items-center justify-between">
+<span class="font-label-sm text-on-surface-variant">Category: Animals</span>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="visibility">visibility</span>
+<span class="font-label-sm">Review Only</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Question Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/50 shadow-sm overflow-hidden transition-all hover:shadow-md">
+<div class="p-4 flex justify-between items-start border-b border-outline-variant/20 bg-surface-container-low/50">
+<span class="font-label-bold text-primary px-2 py-0.5 rounded bg-primary-fixed">#002</span>
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-sm" data-icon="bolt">bolt</span>
+<span class="font-label-sm">Hard</span>
+</div>
+</div>
+<div class="p-5">
+<h3 class="font-headline-lg-mobile text-lg text-on-surface mb-4">The state of being unaware or unconscious of what is happening.</h3>
+<div class="flex flex-wrap gap-tile-gap">
+<div class="w-10 h-12 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-lg text-primary">O</div>
+<div class="w-10 h-12 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-lg text-primary">B</div>
+<div class="w-10 h-12 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-lg text-primary">L</div>
+<div class="w-10 h-12 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-lg text-primary">I</div>
+<div class="w-10 h-12 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-lg text-primary">V</div>
+<div class="w-10 h-12 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-lg text-primary">I</div>
+<div class="w-10 h-12 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-lg text-primary">O</div>
+<div class="w-10 h-12 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-lg text-primary">N</div>
+</div>
+<div class="mt-6 pt-4 border-t border-dashed border-outline-variant/40 flex items-center justify-between">
+<span class="font-label-sm text-on-surface-variant">Category: Abstract</span>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="visibility">visibility</span>
+<span class="font-label-sm">Review Only</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Question Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant/50 shadow-sm overflow-hidden transition-all hover:shadow-md">
+<div class="p-4 flex justify-between items-start border-b border-outline-variant/20 bg-surface-container-low/50">
+<span class="font-label-bold text-primary px-2 py-0.5 rounded bg-primary-fixed">#003</span>
+<div class="flex items-center gap-1 text-secondary-container text-on-secondary-container">
+<span class="material-symbols-outlined text-sm" data-icon="balance">balance</span>
+<span class="font-label-sm">Medium</span>
+</div>
+</div>
+<div class="p-5">
+<h3 class="font-headline-lg-mobile text-lg text-on-surface mb-4">A large natural stream of water flowing in a channel to the sea or a lake.</h3>
+<div class="flex flex-wrap gap-2">
+<div class="w-12 h-14 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-tile-text text-primary">R</div>
+<div class="w-12 h-14 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-tile-text text-primary">I</div>
+<div class="w-12 h-14 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-tile-text text-primary">V</div>
+<div class="w-12 h-14 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-tile-text text-primary">E</div>
+<div class="w-12 h-14 bg-surface-container-highest border-b-[3px] border-outline-variant rounded-lg flex items-center justify-center font-tile-text text-tile-text text-primary">R</div>
+</div>
+<div class="mt-6 pt-4 border-t border-dashed border-outline-variant/40 flex items-center justify-between">
+<span class="font-label-sm text-on-surface-variant">Category: Nature</span>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-sm mr-1" data-icon="visibility">visibility</span>
+<span class="font-label-sm">Review Only</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- End of list spacer -->
+<div class="py-12 text-center">
+<span class="material-symbols-outlined text-outline text-4xl mb-2" data-icon="inventory_2">inventory_2</span>
+<p class="font-label-sm text-outline uppercase tracking-widest">End of current bank</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe max-w-[480px] mx-auto bg-surface dark:bg-inverse-surface shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high p-2 rounded-xl transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="videogame_asset">videogame_asset</span>
+<span class="font-label-sm text-label-sm">Play</span>
+</button>
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-6 py-1 transition-all duration-200 scale-100">
+<span class="material-symbols-outlined" data-icon="fact_check">fact_check</span>
+<span class="font-label-sm text-label-sm">Review</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high p-2 rounded-xl transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span>
+<span class="font-label-sm text-label-sm">Manage</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high p-2 rounded-xl transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</nav>
+<!-- Role Indicator Animation Overlay (Subtle) -->
+<div class="fixed top-20 right-4 z-40 pointer-events-none opacity-20">
+
+</div>
+<script>
+        // Micro-interactions for scrolling and feedback
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.bg-surface-container-lowest');
+            
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('translate-y-0', 'opacity-100');
+                        entry.target.classList.remove('translate-y-4', 'opacity-0');
+                    }
+                });
+            }, observerOptions);
+
+            cards.forEach(card => {
+                card.classList.add('transition-all', 'duration-500', 'ease-out', 'translate-y-4', 'opacity-0');
+                observer.observe(card);
+            });
+        });
+    </script>
+</body></html>

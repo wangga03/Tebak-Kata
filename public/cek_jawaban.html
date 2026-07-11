@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>WordFlow Admin - Review Portal</title>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <!-- Top AppBar -->
+    <header class="app-bar">
+        <div class="app-bar-content container">
+            <div class="d-flex align-items-center gap-4">
+                <span class="material-symbols-outlined text-primary">menu</span>
+                <h1 class="headline-lg-mobile text-primary" style="font-size: 20px; line-height: 1;">WordFlow</h1>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <div class="badge badge-secondary d-flex align-items-center gap-1" style="display: none;"> <!-- hidden on small screen by default but let's just keep it simple -->
+                    <span class="material-symbols-outlined" style="font-size: 18px;">verified_user</span>
+                    Role: Admin
+                </div>
+                <span class="material-symbols-outlined text-primary">account_circle</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container d-flex flex-column pt-24 pb-32">
+        <!-- Welcome Section -->
+        <section class="mb-8">
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <h2 class="headline-lg-mobile text-on-surface" style="font-size: 24px;">Review Portal</h2>
+                <div class="badge badge-secondary">Admin</div>
+            </div>
+            <p class="body-md text-on-surface-variant">Reviewing official game data and correct answers for the current session.</p>
+        </section>
+
+        <!-- Stats Bento Grid -->
+        <div class="grid-2-cols gap-4 mb-8">
+            <div class="bento-stat">
+                <span class="material-symbols-outlined text-primary mb-2">quiz</span>
+                <span id="total-questions" class="headline-lg-mobile text-on-surface">0</span>
+                <span class="label-sm text-on-surface-variant uppercase">Questions</span>
+            </div>
+            <div class="bento-stat">
+                <span class="material-symbols-outlined text-tertiary mb-2">verified</span>
+                <span class="headline-lg-mobile text-on-surface">100%</span>
+                <span class="label-sm text-on-surface-variant uppercase">Verified</span>
+            </div>
+        </div>
+
+        <!-- Role Banner -->
+        <div class="role-banner mb-6">
+            <span class="material-symbols-outlined text-primary-container">info</span>
+            <div>
+                <p class="label-bold" style="color: var(--primary-container);">View-Only Mode</p>
+                <p class="label-sm text-on-surface-variant">You are currently in the Admin review role. Editing or adding new questions is disabled.</p>
+            </div>
+        </div>
+
+        <!-- Question List -->
+        <div id="review-list" class="d-flex flex-column gap-6">
+            <!-- Rendered by JS -->
+        </div>
+    </main>
+
+    <!-- BottomNavBar -->
+    <nav class="bottom-nav">
+        <div class="bottom-nav-content">
+            <a class="nav-item" href="game.html">
+                <span class="material-symbols-outlined mb-2">videogame_asset</span>
+                <span class="label-sm">Play</span>
+            </a>
+            <a class="nav-item" href="dashboard.html">
+                <span class="material-symbols-outlined mb-2" style="font-variation-settings: 'FILL' 1;">admin_panel_settings</span>
+                <span class="label-sm">Super Admin</span>
+            </a>
+            <a class="nav-item active" href="kelola_soal.html">
+                <span class="material-symbols-outlined mb-2">settings_suggest</span>
+                <span class="label-sm">System</span>
+            </a>
+        </div>
+    </nav>
+    <script src="js/db.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const list = document.getElementById('review-list');
+            list.innerHTML = '<p style="text-align:center;">Memuat data...</p>';
+            
+            const questions = await getQuestions();
+            document.getElementById('total-questions').innerText = questions.length;
+            
+            list.innerHTML = '';
+            questions.forEach(q => {
+                const item = document.createElement('div');
+                item.className = 'review-card';
+                
+                let icon = 'star';
+                let colorClass = 'text-secondary';
+                if (q.level === 2) { icon = 'balance'; colorClass = 'text-secondary-container'; }
+                if (q.level === 3) { icon = 'bolt'; colorClass = 'text-tertiary'; }
+
+                let tilesHtml = '';
+                for(let i=0; i<q.answer.length; i++){
+                    tilesHtml += `<div class="answer-tile" style="${q.answer.length > 5 ? 'width: 40px;' : ''}">${q.answer[i]}</div>`;
+                }
+
+                item.innerHTML = `
+                    <div class="review-header">
+                        <span class="badge" style="background: var(--primary-fixed); color: var(--primary);">#${q.id}</span>
+                        <div class="d-flex align-items-center gap-1 ${colorClass}">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">${icon}</span>
+                            <span class="label-sm">${q.levelText}</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="body-md text-on-surface mb-4">${q.question}</h3>
+                        <div class="letter-pool" style="justify-content: flex-start; gap: ${q.answer.length > 5 ? '4px' : '8px'};">
+                            ${tilesHtml}
+                        </div>
+                        <div class="review-footer mt-6">
+                            <span class="label-sm text-on-surface-variant">Category: ${q.category}</span>
+                            <div class="d-flex align-items-center text-on-surface-variant">
+                                <span class="material-symbols-outlined mr-1" style="font-size: 14px;">visibility</span>
+                                <span class="label-sm">Review Only</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title>Tambah Soal Baru - WordFlow</title>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <!-- Top AppBar -->
+    <header class="app-bar">
+        <div class="app-bar-content container">
+            <div class="d-flex align-items-center gap-3">
+                <button class="icon-button" onclick="window.location.href='kelola_soal.html'">
+                    <span class="material-symbols-outlined text-on-surface">arrow_back</span>
+                </button>
+                <h1 class="headline-lg-mobile text-primary" style="font-size: 20px; line-height: 1;">Tambah Soal Baru</h1>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <span class="material-symbols-outlined text-primary">account_circle</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="container d-flex flex-column pt-24 pb-32">
+        <!-- Hero Animation Area -->
+        <div class="mb-8 p-6" style="background-color: var(--primary-container); color: var(--on-primary-container); border-radius: var(--radius-xl); text-align: center;">
+            <p class="headline-lg-mobile" style="font-size: 24px; margin-bottom: 4px;">Perkaya Kosakata</p>
+            <p class="label-sm" style="opacity: 0.9;">Bangun tantangan baru untuk para pemain!</p>
+        </div>
+
+        <!-- Form Container -->
+        <div class="review-card p-6" style="display: flex; flex-direction: column; gap: 32px;">
+            <!-- Question Field -->
+            <div class="d-flex flex-column gap-2">
+                <label class="label-bold text-on-surface-variant">Pertanyaan</label>
+                <textarea id="question-input" class="input-interactive" rows="3" placeholder="Masukkan pertanyaan teka-teki..." style="resize: none; border-bottom: 2px solid var(--outline-variant); border-top: none; border-left: none; border-right: none; border-radius: 0; background: transparent; padding: 8px 4px;"></textarea>
+                <p class="label-sm text-outline" style="font-size: 10px;">Tip: Gunakan deskripsi yang menarik namun menantang.</p>
+            </div>
+
+            <!-- Answer Key Field -->
+            <div class="d-flex flex-column gap-2">
+                <label class="label-bold text-on-surface-variant">Kunci Jawaban</label>
+                <div class="d-flex gap-2">
+                    <input type="text" id="answer-input" class="input-interactive flex-1" placeholder="CONTOH: GAJAH" style="border-bottom: 2px solid var(--outline-variant); border-top: none; border-left: none; border-right: none; border-radius: 0; background: transparent; padding: 8px 4px; text-transform: uppercase; font-weight: bold; letter-spacing: 0.1em;"/>
+                    <div style="background: rgba(124, 58, 237, 0.1); color: var(--primary); padding: 8px; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                        <span class="material-symbols-outlined">spellcheck</span>
+                    </div>
+                </div>
+                <p class="label-sm text-outline" style="font-size: 10px;">Kata harus terdiri dari 3-10 karakter alfabet.</p>
+            </div>
+
+            <!-- Difficulty Segment Control -->
+            <div class="d-flex flex-column gap-2">
+                <label class="label-bold text-on-surface-variant">Tingkat Kesulitan</label>
+                <div class="segment-control">
+                    <button class="segment-btn active" onclick="selectDifficulty(this)">Mudah</button>
+                    <button class="segment-btn" onclick="selectDifficulty(this)">Sedang</button>
+                    <button class="segment-btn" onclick="selectDifficulty(this)">Sulit</button>
+                </div>
+            </div>
+
+            <!-- Category Dropdown -->
+            <div class="d-flex flex-column gap-2">
+                <label class="label-bold text-on-surface-variant">Kategori</label>
+                <div style="position: relative;">
+                    <select id="category-select" class="custom-select">
+                        <option value="hewan">🐾 Hewan</option>
+                        <option value="alam">🌳 Alam</option>
+                        <option value="teknologi">💻 Teknologi</option>
+                        <option value="makanan">🍕 Makanan</option>
+                        <option value="olahraga">⚽ Olahraga</option>
+                    </select>
+                    <span class="material-symbols-outlined" style="position: absolute; right: 16px; top: 50%; transform: translateY(-50%); pointer-events: none; color: var(--on-surface-variant);">expand_more</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button Area -->
+        <div class="mt-10 px-2 d-flex flex-column gap-4">
+            <button id="save-btn" class="btn-primary d-flex align-items-center justify-content-center gap-2" style="font-size: 18px; padding: 16px; border-radius: 16px; width: 100%;">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">save</span>
+                Simpan Soal
+            </button>
+            <p class="text-center label-sm text-outline" style="font-size: 10px;">Draft soal akan tersimpan secara otomatis jika koneksi terputus.</p>
+        </div>
+    </main>
+
+    <!-- BottomNavBar -->
+    <nav class="bottom-nav">
+        <div class="bottom-nav-content">
+            <a class="nav-item" href="game.html">
+                <span class="material-symbols-outlined mb-2">videogame_asset</span>
+                <span class="label-sm">Play</span>
+            </a>
+            <a class="nav-item" href="dashboard.html">
+                <span class="material-symbols-outlined mb-2">fact_check</span>
+                <span class="label-sm">Review</span>
+            </a>
+            <a class="nav-item active" href="kelola_soal.html">
+                <span class="material-symbols-outlined mb-2" style="font-variation-settings: 'FILL' 1;">settings_suggest</span>
+                <span class="label-sm">Manage</span>
+            </a>
+        </div>
+    </nav>
+    <script src="js/db.js"></script>
+    <script src="js/app.js"></script>
+    <script>
+        function selectDifficulty(element) {
+            const buttons = document.querySelectorAll('.segment-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            element.classList.add('active');
+            
+            element.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                element.style.transform = 'scale(1)';
+            }, 100);
+        }
+
+        const answerInput = document.getElementById('answer-input');
+        if (answerInput) {
+            answerInput.addEventListener('input', function(e) {
+                this.value = this.value.toUpperCase().replace(/[^A-Z]/g, '').substring(0, 10);
+            });
+        }
+
+        document.getElementById('save-btn').addEventListener('click', async () => {
+            const question = document.getElementById('question-input').value.trim();
+            const answer = document.getElementById('answer-input').value.trim();
+            const categoryElement = document.getElementById('category-select');
+            const category = categoryElement.options[categoryElement.selectedIndex].text;
+            const levelText = document.querySelector('.segment-btn.active').innerText;
+
+            if (!question || !answer) {
+                alert('Pertanyaan dan Kunci Jawaban harus diisi!');
+                return;
+            }
+            if (answer.length < 3) {
+                alert('Kunci Jawaban minimal 3 karakter!');
+                return;
+            }
+
+            try {
+                const btn = document.getElementById('save-btn');
+                btn.disabled = true;
+                btn.innerText = 'Menyimpan...';
+
+                await addQuestion({
+                    levelText: levelText,
+                    category: category.split(' ')[1] || category,
+                    question: question,
+                    answer: answer
+                });
+
+                alert('Soal berhasil disimpan!');
+                window.location.href = 'kelola_soal.html';
+            } catch (err) {
+                alert('Terjadi kesalahan saat menyimpan soal.');
+                document.getElementById('save-btn').disabled = false;
+                document.getElementById('save-btn').innerText = 'Simpan Soal';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>WordFlow - Pilih Peran</title>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <!-- Top AppBar -->
+    <header class="app-bar">
+        <div class="app-bar-content container">
+            <div class="d-flex align-items-center gap-2">
+                <span class="material-symbols-outlined text-primary">menu</span>
+                <h1 class="headline-lg-mobile text-primary">WordFlow</h1>
+            </div>
+            <span class="material-symbols-outlined text-primary">account_circle</span>
+        </div>
+    </header>
+
+    <main class="container d-flex flex-column align-items-center pt-24 pb-32">
+        <!-- Welcome Section -->
+        <div class="w-100 text-center mb-10">
+            <div class="d-flex justify-content-center align-items-center bg-primary-fixed floating-anim mb-4" style="width: 80px; height: 80px; border-radius: var(--radius-full); margin: 0 auto;">
+                <span class="material-symbols-outlined text-primary" style="font-size: 40px; font-variation-settings: 'FILL' 1;">auto_awesome</span>
+            </div>
+            <h2 class="headline-lg-mobile text-on-surface mb-2">Selamat Datang di WordFlow</h2>
+            <p class="body-md text-on-surface-variant">Pilih peran Anda untuk memulai pengalaman belajar kata yang seru.</p>
+        </div>
+
+        <!-- Role Selection Container -->
+        <div class="w-100 d-flex flex-column gap-4">
+            <!-- Super Admin Card -->
+            <button class="role-card role-super-admin" onclick="selectRole('Super Admin')">
+                <div class="role-icon-box">
+                    <span class="material-symbols-outlined" style="font-size: 32px;">shield_person</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="label-bold text-on-surface">Super Admin</h3>
+                    <p class="label-sm text-on-surface-variant">Akses penuh ke semua pengaturan sistem dan manajemen pengguna tingkat tinggi.</p>
+                </div>
+                <span class="material-symbols-outlined chevron-icon">chevron_right</span>
+            </button>
+
+            <!-- Admin Card -->
+            <button class="role-card role-admin" onclick="selectRole('Admin')">
+                <div class="role-icon-box">
+                    <span class="material-symbols-outlined" style="font-size: 32px;">manage_accounts</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="label-bold text-on-surface">Admin</h3>
+                    <p class="label-sm text-on-surface-variant">Kelola daftar kata, pantau aktivitas permainan, dan atur partisipan grup.</p>
+                </div>
+                <span class="material-symbols-outlined chevron-icon">chevron_right</span>
+            </button>
+
+            <!-- Partisipan Card -->
+            <button class="role-card role-partisipan" onclick="selectRole('Partisipan')">
+                <div class="role-icon-box">
+                    <span class="material-symbols-outlined" style="font-size: 32px;">sports_esports</span>
+                </div>
+                <div class="flex-1">
+                    <h3 class="label-bold text-on-surface">Partisipan</h3>
+                    <p class="label-sm text-on-surface-variant">Bergabung dalam permainan, pecahkan teka-teki, dan kumpulkan skor tertinggi.</p>
+                </div>
+                <span class="material-symbols-outlined chevron-icon">chevron_right</span>
+            </button>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
