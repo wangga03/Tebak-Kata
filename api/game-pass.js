@@ -35,10 +35,12 @@ module.exports = async function handler(req, res) {
                 await conn.execute('UPDATE game_settings SET is_pass_active = true, game_pass = ? WHERE id = 1', [game_pass]);
             } else if (action === 'deactivate') {
                 await conn.execute('UPDATE game_settings SET is_pass_active = false, game_pass = "-" WHERE id = 1');
+                await conn.execute('DELETE FROM participants');
             } else if (action === 'start_game') {
                 await conn.execute('UPDATE game_settings SET is_game_started = true WHERE id = 1');
             } else if (action === 'stop_game') {
                 await conn.execute('UPDATE game_settings SET is_game_started = false WHERE id = 1');
+                await conn.execute('DELETE FROM participants');
             }
             return res.status(200).json({ success: true });
         } catch (error) {
