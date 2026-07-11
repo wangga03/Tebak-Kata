@@ -106,5 +106,65 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add button logic moved to HTML directly linking to tambah_soal.html
 
+    async function loadParticipants() {
+        const container = document.getElementById('participant-list');
+        if (!container) return;
+        try {
+            const res = await fetch('/api/get-participants');
+            const participants = await res.json();
+            
+            container.innerHTML = '';
+            let activeCount = 0;
+            
+            if (participants.length === 0) {
+                container.innerHTML = '<div class="text-center text-on-surface-variant text-sm py-4">Belum ada peserta.</div>';
+                document.querySelector('.text-label-sm.text-primary.font-bold').innerText = '0 Aktif';
+                return;
+            }
+
+            participants.forEach(p => {
+                const now = new Date();
+                const lastActive = new Date(p.last_active);
+                const diffMs = now - lastActive;
+                const diffMins = Math.floor(diffMs / 60000);
+                
+                const isActive = diffMins < 15;
+                if (isActive) activeCount++;
+                
+                let timeText = diffMins === 0 ? 'Baru saja' : `${diffMins}m lalu`;
+                if (diffMins > 60) {
+                    timeText = `${Math.floor(diffMins/60)}j lalu`;
+                }
+                
+                const initials = p.username.substring(0, 2).toUpperCase();
+                const colorClass = isActive ? 'bg-primary-fixed text-primary' : 'bg-surface-variant text-on-surface-variant';
+                const statusColor = isActive ? 'text-green-500' : 'text-on-surface-variant';
+                const statusText = isActive ? 'AKTIF' : 'OFFLINE';
+
+                container.innerHTML += `
+                    <div class="bg-surface-container-lowest p-4 rounded-xl border border-surface-variant flex items-center justify-between mb-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-full ${colorClass} flex items-center justify-center font-bold">${initials}</div>
+                            <div>
+                                <p class="text-label-bold text-on-surface">${p.username}</p>
+                                <p class="text-[11px] text-on-surface-variant">Level ${p.current_level} Selesai</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-[10px] font-bold ${statusColor}">${statusText}</span>
+                            <span class="text-[10px] text-on-surface-variant opacity-60">${timeText}</span>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.querySelector('.text-label-sm.text-primary.font-bold').innerText = `${activeCount} Aktif`;
+        } catch (e) {
+            console.error(e);
+            container.innerHTML = '<div class="text-center text-error text-sm py-4">Gagal memuat peserta.</div>';
+        }
+    }
+
     loadQuestions();
+    loadParticipants();
 });
