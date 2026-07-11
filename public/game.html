@@ -249,6 +249,19 @@
                 if (!answeredQuestions.includes(currentQuestion.id)) {
                     answeredQuestions.push(currentQuestion.id);
                     correctCount++;
+                    // Update score real-time
+                    const currentUsername = localStorage.getItem('username');
+                    if (currentUsername) {
+                        fetch('/api/leaderboard', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ 
+                                username: currentUsername, 
+                                score: correctCount * 150,
+                                current_level: answeredQuestions.length
+                            })
+                        });
+                    }
                 }
                 createConfetti();
                 document.getElementById('feedback-benar-modal').style.display = 'flex';

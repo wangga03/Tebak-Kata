@@ -9,11 +9,11 @@ module.exports = async function handler(req, res) {
         }
         
         if (req.method === 'POST') {
-            const { username, score } = req.body;
+            const { username, score, current_level } = req.body;
             if (!username) return res.status(400).json({ error: 'Username required' });
             
             try { await conn.execute('ALTER TABLE participants ADD COLUMN score INT DEFAULT 0'); } catch (e) {}
-            await conn.execute('UPDATE participants SET score = GREATEST(IFNULL(score, 0), ?) WHERE username = ?', [score || 0, username]);
+            await conn.execute('UPDATE participants SET score = GREATEST(IFNULL(score, 0), ?), current_level = GREATEST(IFNULL(current_level, 0), ?) WHERE username = ?', [score || 0, current_level || 0, username]);
             return res.status(200).json({ success: true });
         }
 
