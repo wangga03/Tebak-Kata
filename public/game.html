@@ -133,6 +133,8 @@
             return result;
         }
 
+        let answeredQuestions = [];
+
         async function loadRandomQuestion() {
             document.getElementById('game-question').innerText = "Loading...";
             const questions = await getQuestions();
@@ -141,10 +143,18 @@
                 return;
             }
 
-            // Pick random
-            currentQuestion = questions[Math.floor(Math.random() * questions.length)];
+            const remainingQuestions = questions.filter(q => !answeredQuestions.includes(q.id));
+            if (remainingQuestions.length === 0) {
+                // All questions answered
+                localStorage.setItem('finalScore', answeredQuestions.length * 150);
+                window.location.href = 'skor-akhir.html';
+                return;
+            }
+
+            // Pick random from remaining
+            currentQuestion = remainingQuestions[Math.floor(Math.random() * remainingQuestions.length)];
             
-            document.getElementById('game-level').innerText = currentQuestion.levelText;
+            document.getElementById('game-level').innerText = currentQuestion.levelText || `Level ${answeredQuestions.length + 1}`;
             document.getElementById('game-question').innerText = currentQuestion.question;
 
             // Render Slots
@@ -245,6 +255,9 @@
             }
 
             if (answer === currentQuestion.answer) {
+                if (!answeredQuestions.includes(currentQuestion.id)) {
+                    answeredQuestions.push(currentQuestion.id);
+                }
                 createConfetti();
                 document.getElementById('feedback-benar-modal').style.display = 'flex';
             } else {
