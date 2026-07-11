@@ -214,7 +214,16 @@
         });
     
         function closeFeedbackBenar() { document.getElementById('feedback-benar-modal').style.display = 'none'; loadRandomQuestion(); }
-        function closeFeedbackSalah() { document.getElementById('feedback-salah-modal').style.display = 'none'; }
+        function closeFeedbackSalah() { 
+            document.getElementById('feedback-salah-modal').style.display = 'none'; 
+            // Auto clear board
+            const slots = document.querySelectorAll('#answer-grid div');
+            slots.forEach(slot => {
+                if (slot.classList.contains('filled-slot')) {
+                    slot.click();
+                }
+            });
+        }
         
         window.addEventListener('beforeunload', () => {
             const username = localStorage.getItem('username');
