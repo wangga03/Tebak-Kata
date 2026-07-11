@@ -18,7 +18,7 @@ module.exports = async function handler(req, res) {
         }
 
         if (req.method === 'DELETE') {
-            await conn.execute('UPDATE participants SET score = 0, current_level = 0');
+            await conn.execute('DELETE FROM participants');
             return res.status(200).json({ success: true, message: 'Leaderboard reset successfully' });
         }
         

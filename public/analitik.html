@@ -393,7 +393,7 @@
         });
 
         async function resetLeaderboard() {
-            if (confirm('Apakah Anda yakin ingin mereset semua skor? Semua progress peserta akan kembali ke 0.')) {
+            if (confirm('Apakah Anda yakin ingin mereset leaderboard? Semua peserta akan dihapus dari papan skor.')) {
                 try {
                     const res = await fetch('/api/leaderboard', { method: 'DELETE' });
                     const data = await res.json();
