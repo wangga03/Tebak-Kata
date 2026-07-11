@@ -223,13 +223,21 @@
             
             // Read score from localStorage
             const finalScore = localStorage.getItem('finalScore') || '0';
+            const correctCount = parseInt(localStorage.getItem('correctCount') || '0');
+            const wrongCount = parseInt(localStorage.getItem('wrongCount') || '0');
+            const totalCount = correctCount + wrongCount;
+            const accuracyPercent = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
+
             document.querySelector('.score-glow').innerText = parseInt(finalScore).toLocaleString() + ' pts';
             
             // Set accuracy
             const accuracyCards = document.querySelectorAll('.font-headline-lg-mobile.text-primary');
             if (accuracyCards.length > 0) {
-                // Approximate accuracy or just show 100% since game is simple
-                accuracyCards[0].innerText = '100%';
+                accuracyCards[0].innerText = `${correctCount}/${totalCount}`;
+                const accuracyLabel = accuracyCards[0].nextElementSibling;
+                if (accuracyLabel) {
+                    accuracyLabel.innerText = `Akurasi: ${accuracyPercent}%`;
+                }
             }
 
             // Add click interaction for replay of confetti

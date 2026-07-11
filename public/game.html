@@ -134,6 +134,8 @@
         }
 
         let answeredQuestions = [];
+        let correctCount = 0;
+        let wrongCount = 0;
 
         async function loadRandomQuestion() {
             document.getElementById('game-question').innerText = "Loading...";
@@ -146,7 +148,9 @@
             const remainingQuestions = questions.filter(q => !answeredQuestions.includes(q.id));
             if (remainingQuestions.length === 0) {
                 // All questions answered
-                localStorage.setItem('finalScore', answeredQuestions.length * 150);
+                localStorage.setItem('finalScore', correctCount * 150);
+                localStorage.setItem('correctCount', correctCount);
+                localStorage.setItem('wrongCount', wrongCount);
                 window.location.href = 'skor-akhir.html';
                 return;
             }
@@ -257,10 +261,16 @@
             if (answer === currentQuestion.answer) {
                 if (!answeredQuestions.includes(currentQuestion.id)) {
                     answeredQuestions.push(currentQuestion.id);
+                    correctCount++;
                 }
                 createConfetti();
                 document.getElementById('feedback-benar-modal').style.display = 'flex';
             } else {
+                if (!answeredQuestions.includes(currentQuestion.id)) {
+                    answeredQuestions.push(currentQuestion.id);
+                    wrongCount++;
+                }
+                document.getElementById('wrong-answer-text').innerText = `Jawaban yang benar adalah: ${currentQuestion.answer}`;
                 document.getElementById('feedback-salah-modal').style.display = 'flex';
             }
         });
@@ -272,13 +282,7 @@
         function closeFeedbackBenar() { document.getElementById('feedback-benar-modal').style.display = 'none'; loadRandomQuestion(); }
         function closeFeedbackSalah() { 
             document.getElementById('feedback-salah-modal').style.display = 'none'; 
-            // Auto clear board
-            const slots = document.querySelectorAll('#answer-grid div');
-            slots.forEach(slot => {
-                if (slot.classList.contains('filled-slot')) {
-                    slot.click();
-                }
-            });
+            loadRandomQuestion();
         }
         
         function createConfetti() {
@@ -390,26 +394,17 @@
 <!-- Typography Content -->
 <div class="space-y-2">
 <h2 class="font-headline-xl text-headline-xl text-error">Waduh!</h2>
-<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Ayo Coba Lagi!</h3>
-<p class="font-body-md text-body-md text-on-surface-variant px-4">
-                    Jawabanmu sedikit meleset, tapi jangan menyerah! Kamu pasti bisa memecahkan kata ini.
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Jawabanmu Salah!</h3>
+<p id="wrong-answer-text" class="font-body-md text-body-md text-on-surface-variant px-4">
+                    Jawaban yang benar adalah: -
                 </p>
 </div>
 <!-- Buttons Section -->
 <div class="w-full flex flex-col gap-4">
 <!-- Retry Button -->
 <button onclick="closeFeedbackSalah()" class="w-full py-4 bg-error text-on-error rounded-xl font-label-bold text-headline-lg-mobile squishy-press tile-3d-red flex items-center justify-center gap-2">
-<span class="material-symbols-outlined">refresh</span>
-                    ULANGI LAGI
-                </button>
-<!-- Hint Button -->
-<button class="w-full py-4 bg-secondary-container text-on-secondary-container rounded-xl font-label-bold text-headline-lg-mobile squishy-press tile-3d flex items-center justify-center gap-2">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
-                    LIHAT PETUNJUK
-                </button>
-<!-- Skip/Secondary Action -->
-<button class="font-label-bold text-on-surface-variant hover:text-on-surface transition-colors" onclick="closeFeedbackSalah()">
-                    Nanti Saja
+                    LANJUTKAN
+<span class="material-symbols-outlined">arrow_forward</span>
                 </button>
 </div>
 <!-- Tiny Decorative Elements -->
