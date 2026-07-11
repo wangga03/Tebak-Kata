@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     try {
         const result = await conn.execute('SELECT * FROM questions ORDER BY created_at DESC');
         
-        const formattedRows = result.rows.map(row => ({
+        const formattedRows = result.map(row => ({
             id: row.id,
             question: row.question,
             answer: row.answer,
