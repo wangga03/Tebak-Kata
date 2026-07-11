@@ -171,4 +171,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadQuestions();
     loadParticipants();
+    setInterval(loadParticipants, 3000); // Realtime updates every 3 seconds
 });
