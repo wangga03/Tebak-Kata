@@ -156,7 +156,7 @@
 <label class="block font-label-bold text-label-bold text-on-surface-variant px-1" for="identifier">Email or Username</label>
 <div class="relative group">
 <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">person</span>
-<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-b-2 border-transparent focus:border-primary focus:ring-0 rounded-xl transition-all font-body-md text-on-surface placeholder:text-outline/50" id="identifier" placeholder="admin@wordflow.app" type="text"/>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-b-2 border-transparent focus:border-primary focus:ring-0 rounded-xl transition-all font-body-md text-on-surface placeholder:text-outline/50" id="username" placeholder="admin" type="text"/>
 </div>
 </div>
 <!-- Password Field -->
@@ -226,15 +226,15 @@
             const btn = e.target.querySelector('button[type="submit"]');
             const originalContent = btn.innerHTML;
             
-            const userVal = document.getElementById('username').value.trim();
-            const passVal = document.getElementById('password').value.trim();
-            
             // Visual feedback
             btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span><span>Authenticating...</span>';
             btn.disabled = true;
             btn.classList.add('opacity-80');
             
             try {
+                const userVal = document.getElementById('username').value.trim();
+                const passVal = document.getElementById('password').value.trim();
+                
                 await loginAdmin(userVal, passVal);
                 
                 btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span><span>Access Granted</span>';
