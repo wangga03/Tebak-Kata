@@ -30,10 +30,14 @@ async function addQuestion(questionData) {
             })
         });
         
-        if (!response.ok) throw new Error('Network response was not ok');
-        return await response.json();
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.details || data.error || 'Network response was not ok');
+        }
+        return data;
     } catch (error) {
         console.error('Error adding question:', error);
+        alert('Error Server: ' + error.message);
         throw error;
     }
 }

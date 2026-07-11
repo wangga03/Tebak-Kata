@@ -26,8 +26,8 @@ module.exports = async (req, res) => {
         }));
 
         res.status(200).json(formattedRows);
-    } catch (error) {
-        console.error('Error fetching questions:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to get questions', details: err.message });
     }
 };

@@ -33,8 +33,8 @@ module.exports = async (req, res) => {
             id: result.insertId.toString(),
             message: 'Question added successfully' 
         });
-    } catch (error) {
-        console.error('Error adding question:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Failed to add question', details: err.message });
     }
 };
