@@ -220,7 +220,10 @@
 <section class="space-y-4">
 <div class="flex justify-between items-center">
 <h3 class="font-headline-lg-mobile text-[20px] font-extrabold text-on-surface">Top Leaderboard</h3>
+<div class="flex gap-3 items-center">
+<button onclick="resetLeaderboard()" class="text-error font-label-bold text-label-sm bg-error-container px-3 py-1 rounded-full transition-all active:scale-95">Reset</button>
 <a href="leaderboard.html" class="text-primary font-label-bold text-label-sm">Lihat Semua</a>
+</div>
 </div>
 <div id="leaderboard-list" class="space-y-3">
     <!-- Items will be injected here via JS -->
@@ -388,5 +391,22 @@
                 console.error('Failed to sync analytics:', e);
             }
         });
+
+        async function resetLeaderboard() {
+            if (confirm('Apakah Anda yakin ingin mereset semua skor? Semua progress peserta akan kembali ke 0.')) {
+                try {
+                    const res = await fetch('/api/leaderboard', { method: 'DELETE' });
+                    const data = await res.json();
+                    if (data.success) {
+                        alert('Leaderboard berhasil direset!');
+                        window.location.reload();
+                    } else {
+                        alert('Gagal mereset: ' + data.error);
+                    }
+                } catch (e) {
+                    alert('Terjadi kesalahan sistem.');
+                }
+            }
+        }
     </script>
 </body></html>

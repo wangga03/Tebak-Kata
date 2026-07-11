@@ -16,6 +16,11 @@ module.exports = async function handler(req, res) {
             await conn.execute('UPDATE participants SET score = GREATEST(IFNULL(score, 0), ?) WHERE username = ?', [score || 0, username]);
             return res.status(200).json({ success: true });
         }
+
+        if (req.method === 'DELETE') {
+            await conn.execute('UPDATE participants SET score = 0, current_level = 0');
+            return res.status(200).json({ success: true, message: 'Leaderboard reset successfully' });
+        }
         
         return res.status(405).json({ error: 'Method not allowed' });
     } catch (err) {
