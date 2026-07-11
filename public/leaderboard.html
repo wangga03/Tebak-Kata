@@ -136,102 +136,13 @@
 <!-- Podium Section -->
 <section class="mt-4 mb-8">
 <h2 class="font-headline-lg-mobile text-headline-lg-mobile text-center text-on-surface mb-8">Papan Skor</h2>
-<div class="flex items-end justify-center gap-4 h-64">
-<!-- Rank 2 -->
-<div class="flex flex-col items-center w-24">
-<div class="relative mb-2">
-<div class="w-16 h-16 rounded-full border-4 border-surface-container-highest overflow-hidden shadow-md">
-<img class="w-full h-full object-cover" data-alt="A professional digital avatar of a female participant with short hair and modern glasses, styled in a friendly, minimalist 3D aesthetic. The lighting is soft and high-key to match a light-mode UI, with subtle purple and yellow color pops in her attire to reflect the WordFlow brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDd14jlZgwExSnwslhR5fA6avFE7lBSwwd_S6tzExaE3Xz6jX3qXtBh-jdqXsjInp3wrX4yG71D6GxT4O6X781xMHH0ydLyJO_d-Hiv_qeWDO8PjapNksKLjD1YFU0Tlnzw1tGtPLSpO7hCnIQnSD4FxI7q3C9JPQJqmZfl_KGXym96pXvwJaMKR3az-ZLEkGI7QT5f8myhi64AwbVhT80XEFsb2UCF6jor_dw3FmKvE5CHWBkpJZ8"/>
-</div>
-<div class="absolute -bottom-1 -right-1 bg-surface-container-highest text-on-surface-variant w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border-2 border-white">2</div>
-</div>
-<div class="bg-surface-container-low w-full h-24 rounded-t-xl flex flex-col items-center justify-start pt-2 shadow-sm border-x border-t border-outline-variant">
-<span class="font-label-bold text-label-bold truncate w-full text-center px-1">Maya</span>
-<span class="text-primary font-bold text-sm">12,450</span>
-</div>
-</div>
-<!-- Rank 1 (Middle/Largest) -->
-<div class="flex flex-col items-center w-32 scale-110 -translate-y-2">
-<div class="relative mb-3">
-<span class="material-symbols-outlined text-secondary text-4xl absolute -top-8 left-1/2 -translate-x-1/2 medal-fill" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
-<div class="w-20 h-20 rounded-full border-4 border-secondary-container overflow-hidden shadow-xl">
-<img class="w-full h-full object-cover" data-alt="A cheerful 3D rendered avatar of a boy with a backwards cap, designed in a modern, high-contrast playful style. The lighting is bright and cheerful, emphasizing the golden yellow and deep purple highlights. The character exudes an energetic and encouraging vibe consistent with the WordFlow brand." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1UpWiqBJ1-DQn74hAGL8wrVklIZxnLlltGVBlHQ82BMpCy7nI_Acv1oHHX60kTN1fyHkYduMeq-o-qT1vnzCB8QwkA7Nps-Gx7IMVAXbrKF44v0Ju7lYLNHCls89bVMeSeT9ZofQ8XG1PN5ZwBq_j1xMdPIY579q0aMVqv19wgZx5zeZ0-m7nMt4Ju_rtxtTXBNjYmv-gOOfie2x5u18T-oZYP51xRHdWQkHqqdOwuuXRZGWQgQ0"/>
-</div>
-<div class="absolute -bottom-1 -right-1 bg-secondary-container text-on-secondary-container w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 border-white">1</div>
-</div>
-<div class="bg-primary-container w-full h-32 rounded-t-2xl flex flex-col items-center justify-start pt-4 shadow-lg">
-<span class="font-label-bold text-label-bold text-white truncate w-full text-center px-1">Alex K.</span>
-<span class="text-secondary-container font-extrabold text-lg">15,820</span>
-</div>
-</div>
-<!-- Rank 3 -->
-<div class="flex flex-col items-center w-24">
-<div class="relative mb-2">
-<div class="w-16 h-16 rounded-full border-4 border-tertiary-fixed overflow-hidden shadow-md">
-<img class="w-full h-full object-cover" data-alt="A modern 3D avatar of a male player with a slight beard and stylish hair, rendered in a clean, minimalist aesthetic. The lighting is soft, creating a premium look with subtle tonal depth. The colors are muted neutrals with a hint of purple, aligning with a light-mode gaming interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCyGGWN4oYtL2_bWQwT-u0OnxQ2Z3RwYnwz2kFbT3kT4yLl5-m-6X4JQP6PHiakomMUEo0n7Tjvj_tuRQh_9ofFq3jhdEvOHxd7XCXecATp7jiDBa8GEgiZRMiqAg_2HSB7KIhKf9fv4gxAq0it_RqZgmJm5RpMKdRYWiGSbtwzQQlhIz2MYHSJCQ3JpGzsmn9PXkT_0va6dGDOxb6UfV6mGRQV2xnlDvcJ0aZlHeRS8QT0AstWa88"/>
-</div>
-<div class="absolute -bottom-1 -right-1 bg-tertiary-fixed text-on-tertiary-fixed w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border-2 border-white">3</div>
-</div>
-<div class="bg-surface-container-low w-full h-16 rounded-t-xl flex flex-col items-center justify-start pt-2 shadow-sm border-x border-t border-outline-variant">
-<span class="font-label-bold text-label-bold truncate w-full text-center px-1">Rian</span>
-<span class="text-primary font-bold text-sm">11,200</span>
-</div>
-</div>
+<div class="flex items-end justify-center gap-4 h-64" id="podium-container">
+    <div class="w-full text-center text-on-surface-variant font-label-bold animate-pulse">Memuat Papan Skor...</div>
 </div>
 </section>
 <!-- Full Ranking List -->
-<section class="space-y-3 mb-12">
-<!-- Rank 4 -->
-<div class="flex items-center bg-surface-container-lowest p-3 rounded-xl border border-outline-variant shadow-sm hover:translate-y-[-2px] transition-transform cursor-pointer squishy-active">
-<span class="w-8 font-label-bold text-on-surface-variant">4</span>
-<img class="w-10 h-10 rounded-full bg-surface-container" data-alt="Detailed 3D avatar of a person with colorful glasses, high contrast lighting, and vibrant purple background, following a modern playful design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc2Yvdh69GsUsfmobkzMFYAX0GKW4roKfQMxaave_tRtyi9PdshRutcGdmARbpGgU3Yoe9t68lj9M4Vzcyx-gjfpAe8o91A43DDo1vhJp8X8k_UgR8AS9k7YgXeU5lEm9GQXr22pz6bKZ5hBaOUZNZXB5L2YC_SKM_GENO4J9FrdJOdfdE751zPE0p2wMTALNQtooL6vdK9jdjJxClbGnIjQwwOXothHtrBa0hgNs9DKtolej2zSU"/>
-<div class="ml-3 flex-grow">
-<p class="font-label-bold text-on-surface">Putri Indah</p>
-<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Level 24</p>
-</div>
-<div class="text-right">
-<p class="font-bold text-primary">9,840</p>
-</div>
-</div>
-<!-- Rank 5 (Current User Highlight) -->
-<div class="flex items-center bg-primary-container p-3 rounded-xl border-2 border-primary shadow-md transform scale-[1.02] squishy-active cursor-pointer">
-<span class="w-8 font-label-bold text-on-primary-container">5</span>
-<img class="w-10 h-10 rounded-full border-2 border-white" data-alt="A vibrant, stylized 3D character avatar of a young gamer with purple headphones and a cheerful expression. The avatar is set against a clean, light-mode background with soft global lighting, fitting the modern and playful WordFlow design system. High-quality digital render with purple and yellow accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5Sb1pfld2A-L4HocPubgXBTqpajMHtmH4krpk5e_fJ0lkqMylpPxgZA1pFXMuRLstx-8B_l7eg06KyQU9eJNK1pA7jo0tqDyavnQ4mzhFaOz1y0Z2JNs68YKCTnZ-OFa-xpKM0Lhu73VPJBjiWqerv0u899Fy8w995DfM07O1mIErdVoCur4XdaxRwfxCCCwn7mdhXIna67b-P9f-L9r8ha2K1bz4xkB8BMnL8p55uCfDWSIIYbg"/>
-<div class="ml-3 flex-grow">
-<div class="flex items-center gap-2">
-<p class="font-label-bold text-white">Kamu</p>
-<span class="bg-secondary-container text-on-secondary-container text-[8px] font-extrabold px-1.5 py-0.5 rounded-full uppercase">Saya</span>
-</div>
-<p class="text-[10px] text-on-primary-container uppercase tracking-wider">Level 18</p>
-</div>
-<div class="text-right">
-<p class="font-bold text-white">8,320</p>
-</div>
-</div>
-<!-- Rank 6 -->
-<div class="flex items-center bg-surface-container-lowest p-3 rounded-xl border border-outline-variant shadow-sm hover:translate-y-[-2px] transition-transform cursor-pointer squishy-active">
-<span class="w-8 font-label-bold text-on-surface-variant">6</span>
-<img class="w-10 h-10 rounded-full bg-surface-container" data-alt="A friendly digital character avatar for a word-based game, featuring a minimalist 3D style and soft, high-key studio lighting. The palette focuses on purple and yellow brand accents against a neutral light background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBar1tkArHIM1V478OuaaZvOsVqRKyx48X40ETph72GFqHgyq5_TBfKbUJkbZ8At2NUKuMjeTmh5c7MDFPbO2bqZiEa5P_pvMAis6sttBBa475obmQD7SHs8k8ZsnV48V5kZXuw0GNS1P41X0G3ZcXMiBrrkAF_cDb2qxAotN0CdQJeUSEFETvAjVYHazLUFQBNjykgzcydNTexpMYmfC508bsTUCHPV62b9QiAf7CWBSimK2smdzU"/>
-<div class="ml-3 flex-grow">
-<p class="font-label-bold text-on-surface">Budi Santoso</p>
-<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Level 20</p>
-</div>
-<div class="text-right">
-<p class="font-bold text-primary">7,910</p>
-</div>
-</div>
-<!-- Rank 7 -->
-<div class="flex items-center bg-surface-container-lowest p-3 rounded-xl border border-outline-variant shadow-sm hover:translate-y-[-2px] transition-transform cursor-pointer squishy-active">
-<span class="w-8 font-label-bold text-on-surface-variant">7</span>
-<img class="w-10 h-10 rounded-full bg-surface-container" data-alt="Modern 3D gamer avatar with an energetic and encouraging expression, rendered with high contrast surfaces and bright studio lighting. The aesthetic is tactile and high-end, featuring playful colors compatible with WordFlow's vibrant brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwUS_SO8haQKrpKyZoDzf3fvHdfbAO8QSTf-FeUDXP_ELOhDt-cq3cXVpq78YH3l_7ojGAdORjt8mr5DfLmPfWCXKNyFIG9IHFhnzDfD--iRhJ54_u8LvoOVQ1MivinaersxkqVejn-ycMt9gQIG46y4H9Kyfzeu6nYC64GDqiVqk_E08p5nctogxvcH61YJE3PBuyqtEh7o0TwQ1YZ372Rx0mCZeanQZOccQHzi-mADtiIstACxQ"/>
-<div class="ml-3 flex-grow">
-<p class="font-label-bold text-on-surface">Dewi S.</p>
-<p class="text-[10px] text-on-surface-variant uppercase tracking-wider">Level 15</p>
-</div>
-<div class="text-right">
-<p class="font-bold text-primary">7,100</p>
-</div>
-</div>
+<section class="space-y-3 mb-12" id="leaderboard-list">
+</section>
 <!-- Load More -->
 <button class="w-full py-4 text-primary font-label-bold flex items-center justify-center gap-2 hover:bg-surface-container rounded-xl transition-colors">
                 Lihat Selengkapnya
@@ -241,17 +152,117 @@
 </main>
 
 <script>
-        // Micro-interaction for clicking ranks
-        document.querySelectorAll('.squishy-active').forEach(item => {
-            item.addEventListener('mousedown', () => {
-                item.style.transform = 'scale(0.97)';
-            });
-            item.addEventListener('mouseup', () => {
-                item.style.transform = 'scale(1)';
-            });
-            item.addEventListener('mouseleave', () => {
-                item.style.transform = 'scale(1)';
-            });
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const res = await fetch('/api/get-leaderboard');
+                const players = await res.json();
+                const currentUsername = localStorage.getItem('username');
+
+                const podiumContainer = document.getElementById('podium-container');
+                const listContainer = document.getElementById('leaderboard-list');
+                
+                podiumContainer.innerHTML = '';
+                listContainer.innerHTML = '';
+
+                if (players.length === 0) {
+                    podiumContainer.innerHTML = '<div class="w-full text-center text-on-surface-variant">Belum ada peserta</div>';
+                    return;
+                }
+
+                // Render Rank 2
+                if (players[1]) {
+                    podiumContainer.innerHTML += `
+                    <div class="flex flex-col items-center w-24">
+                    <div class="relative mb-2">
+                    <div class="w-16 h-16 rounded-full border-4 border-surface-container-highest flex items-center justify-center font-bold text-xl bg-surface shadow-md">
+                    ${players[1].username.substring(0,2).toUpperCase()}
+                    </div>
+                    <div class="absolute -bottom-1 -right-1 bg-surface-container-highest text-on-surface-variant w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border-2 border-white">2</div>
+                    </div>
+                    <div class="bg-surface-container-low w-full h-24 rounded-t-xl flex flex-col items-center justify-start pt-2 shadow-sm border-x border-t border-outline-variant">
+                    <span class="font-label-bold text-label-bold truncate w-full text-center px-1">${players[1].username}</span>
+                    <span class="text-primary font-bold text-sm">${players[1].score.toLocaleString()}</span>
+                    </div>
+                    </div>`;
+                }
+
+                // Render Rank 1
+                if (players[0]) {
+                    podiumContainer.innerHTML += `
+                    <div class="flex flex-col items-center w-32 scale-110 -translate-y-2">
+                    <div class="relative mb-3">
+                    <span class="material-symbols-outlined text-secondary text-4xl absolute -top-8 left-1/2 -translate-x-1/2 medal-fill" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
+                    <div class="w-20 h-20 rounded-full border-4 border-secondary-container flex items-center justify-center font-extrabold text-2xl bg-white shadow-xl">
+                    ${players[0].username.substring(0,2).toUpperCase()}
+                    </div>
+                    <div class="absolute -bottom-1 -right-1 bg-secondary-container text-on-secondary-container w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold border-2 border-white">1</div>
+                    </div>
+                    <div class="bg-primary-container w-full h-32 rounded-t-2xl flex flex-col items-center justify-start pt-4 shadow-lg">
+                    <span class="font-label-bold text-label-bold text-white truncate w-full text-center px-1">${players[0].username}</span>
+                    <span class="text-secondary-container font-extrabold text-lg">${players[0].score.toLocaleString()}</span>
+                    </div>
+                    </div>`;
+                }
+
+                // Render Rank 3
+                if (players[2]) {
+                    podiumContainer.innerHTML += `
+                    <div class="flex flex-col items-center w-24">
+                    <div class="relative mb-2">
+                    <div class="w-16 h-16 rounded-full border-4 border-tertiary-fixed flex items-center justify-center font-bold text-xl bg-surface shadow-md">
+                    ${players[2].username.substring(0,2).toUpperCase()}
+                    </div>
+                    <div class="absolute -bottom-1 -right-1 bg-tertiary-fixed text-on-tertiary-fixed w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold border-2 border-white">3</div>
+                    </div>
+                    <div class="bg-surface-container-low w-full h-16 rounded-t-xl flex flex-col items-center justify-start pt-2 shadow-sm border-x border-t border-outline-variant">
+                    <span class="font-label-bold text-label-bold truncate w-full text-center px-1">${players[2].username}</span>
+                    <span class="text-primary font-bold text-sm">${players[2].score.toLocaleString()}</span>
+                    </div>
+                    </div>`;
+                }
+
+                // Render rest of the list
+                for (let i = 3; i < players.length; i++) {
+                    const p = players[i];
+                    const isMe = p.username === currentUsername;
+                    
+                    if (isMe) {
+                        listContainer.innerHTML += `
+                        <div class="flex items-center bg-primary-container p-3 rounded-xl border-2 border-primary shadow-md transform scale-[1.02]">
+                        <span class="w-8 font-label-bold text-on-primary-container">${i + 1}</span>
+                        <div class="w-10 h-10 rounded-full border-2 border-white bg-surface flex items-center justify-center font-bold text-primary">
+                        ${p.username.substring(0,2).toUpperCase()}
+                        </div>
+                        <div class="ml-3 flex-grow">
+                        <div class="flex items-center gap-2">
+                        <p class="font-label-bold text-white">${p.username}</p>
+                        <span class="bg-secondary-container text-on-secondary-container text-[8px] font-extrabold px-1.5 py-0.5 rounded-full uppercase">Saya</span>
+                        </div>
+                        </div>
+                        <div class="text-right">
+                        <p class="font-bold text-white">${p.score.toLocaleString()}</p>
+                        </div>
+                        </div>`;
+                    } else {
+                        listContainer.innerHTML += `
+                        <div class="flex items-center bg-surface-container-lowest p-3 rounded-xl border border-outline-variant shadow-sm hover:translate-y-[-2px] transition-transform">
+                        <span class="w-8 font-label-bold text-on-surface-variant">${i + 1}</span>
+                        <div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-bold text-primary">
+                        ${p.username.substring(0,2).toUpperCase()}
+                        </div>
+                        <div class="ml-3 flex-grow">
+                        <p class="font-label-bold text-on-surface">${p.username}</p>
+                        </div>
+                        <div class="text-right">
+                        <p class="font-bold text-primary">${p.score.toLocaleString()}</p>
+                        </div>
+                        </div>`;
+                    }
+                }
+
+            } catch (err) {
+                console.error('Failed to load leaderboard', err);
+            }
         });
     </script>
 </body></html>
