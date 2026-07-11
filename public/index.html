@@ -219,27 +219,37 @@
         </p>
 </footer>
 <!-- Simple Micro-interactions Script -->
-<script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
+    <script src="js/db.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = e.target.querySelector('button[type="submit"]');
             const originalContent = btn.innerHTML;
+            
+            const userVal = document.getElementById('username').value.trim();
+            const passVal = document.getElementById('password').value.trim();
             
             // Visual feedback
             btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span><span>Authenticating...</span>';
             btn.disabled = true;
             btn.classList.add('opacity-80');
             
-            setTimeout(() => {
+            try {
+                await loginAdmin(userVal, passVal);
+                
                 btn.innerHTML = '<span class="material-symbols-outlined">check_circle</span><span>Access Granted</span>';
                 btn.classList.remove('bg-primary');
                 btn.classList.add('bg-green-600');
                 
-                // Mock redirect
                 setTimeout(() => {
                     window.location.href = 'kelola_soal.html';
                 }, 500);
-            }, 1000);
+            } catch (err) {
+                alert('Gagal Login: ' + err.message);
+                btn.innerHTML = originalContent;
+                btn.classList.remove('opacity-80');
+                btn.disabled = false;
+            }
         });
 
         // Toggle visibility icon logic
