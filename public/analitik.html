@@ -157,8 +157,8 @@
 <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-full">+12%</span>
 </div>
 <div>
-<p class="font-label-sm text-label-sm text-on-surface-variant">Rerata Skor</p>
-<p class="font-headline-lg-mobile text-headline-lg-mobile text-primary">2,840</p>
+<p id="total-soal-label" class="font-label-sm text-label-sm text-on-surface-variant">Total Soal</p>
+<p id="total-soal-val" class="font-headline-lg-mobile text-headline-lg-mobile text-primary">...</p>
 </div>
 </div>
 <!-- Active Players -->
@@ -169,7 +169,7 @@
 </div>
 <div>
 <p class="font-label-sm text-label-sm text-on-surface-variant">Peserta Aktif</p>
-<p class="font-headline-lg-mobile text-headline-lg-mobile text-secondary">142</p>
+<p id="active-players-val" class="font-headline-lg-mobile text-headline-lg-mobile text-secondary">...</p>
 </div>
 </div>
 </section>
@@ -216,41 +216,14 @@
 </div>
 </div>
 </section>
-<!-- Hardest Questions List -->
+<!-- Top Leaderboard List -->
 <section class="space-y-4">
 <div class="flex justify-between items-center">
-<h3 class="font-headline-lg-mobile text-[20px] font-extrabold text-on-surface">Pertanyaan Tersulit</h3>
-<button class="text-primary font-label-bold text-label-sm">Lihat Semua</button>
+<h3 class="font-headline-lg-mobile text-[20px] font-extrabold text-on-surface">Top Leaderboard</h3>
+<a href="leaderboard.html" class="text-primary font-label-bold text-label-sm">Lihat Semua</a>
 </div>
-<div class="space-y-3">
-<!-- Item 1 -->
-<div class="bg-surface-container-lowest p-4 rounded-xl border border-surface-variant flex items-center gap-4 transition-all duration-200 active:scale-95">
-<div class="w-12 h-12 rounded-lg bg-error-container flex items-center justify-center shrink-0">
-<span class="text-error material-symbols-outlined">warning</span>
-</div>
-<div class="flex-1">
-<p class="font-label-bold text-on-surface line-clamp-1">Definisi: 'Paradoks Temporal'</p>
-<p class="text-xs text-on-surface-variant">78% Salah Jawab</p>
-</div>
-<div class="text-right shrink-0">
-<p class="text-[10px] font-bold text-outline">KATEGORI</p>
-<span class="text-[10px] bg-secondary-fixed px-2 py-0.5 rounded-full text-on-secondary-fixed font-bold">Logika</span>
-</div>
-</div>
-<!-- Item 2 -->
-<div class="bg-surface-container-lowest p-4 rounded-xl border border-surface-variant flex items-center gap-4 transition-all duration-200 active:scale-95">
-<div class="w-12 h-12 rounded-lg bg-orange-100 flex items-center justify-center shrink-0">
-<span class="text-orange-600 material-symbols-outlined">question_mark</span>
-</div>
-<div class="flex-1">
-<p class="font-label-bold text-on-surface line-clamp-1">Anagram: 'ORCHESTRA'</p>
-<p class="text-xs text-on-surface-variant">62% Salah Jawab</p>
-</div>
-<div class="text-right shrink-0">
-<p class="text-[10px] font-bold text-outline">KATEGORI</p>
-<span class="text-[10px] bg-tertiary-fixed px-2 py-0.5 rounded-full text-on-tertiary-fixed font-bold">Kata</span>
-</div>
-</div>
+<div id="leaderboard-list" class="space-y-3">
+    <!-- Items will be injected here via JS -->
 </div>
 </section>
 <!-- Participant Level Distribution -->
@@ -260,37 +233,37 @@
 <div class="relative z-10 space-y-6">
 <div>
 <h3 class="font-headline-lg-mobile text-[20px] font-extrabold">Distribusi Level</h3>
-<p class="text-sm opacity-80">Total 1,240 pemain terdaftar</p>
+<p id="total-terdaftar" class="text-sm opacity-80">Total ... pemain terdaftar</p>
 </div>
 <div class="space-y-4">
 <!-- Progress Bar 1 -->
 <div class="space-y-2">
 <div class="flex justify-between text-xs font-bold">
 <span>MASTER (LVL 40+)</span>
-<span>15%</span>
+<span id="pct-master">0%</span>
 </div>
 <div class="h-2 w-full bg-white/20 rounded-full overflow-hidden">
-<div class="h-full bg-secondary-container w-[15%] rounded-full shadow-[0_0_8px_rgba(254,208,27,0.6)]"></div>
+<div id="bar-master" class="h-full bg-secondary-container w-[0%] rounded-full shadow-[0_0_8px_rgba(254,208,27,0.6)]"></div>
 </div>
 </div>
 <!-- Progress Bar 2 -->
 <div class="space-y-2">
 <div class="flex justify-between text-xs font-bold">
 <span>EXPERT (LVL 20-39)</span>
-<span>42%</span>
+<span id="pct-expert">0%</span>
 </div>
 <div class="h-2 w-full bg-white/20 rounded-full overflow-hidden">
-<div class="h-full bg-white w-[42%] rounded-full"></div>
+<div id="bar-expert" class="h-full bg-white w-[0%] rounded-full"></div>
 </div>
 </div>
 <!-- Progress Bar 3 -->
 <div class="space-y-2">
 <div class="flex justify-between text-xs font-bold">
 <span>NOVICE (LVL 1-19)</span>
-<span>43%</span>
+<span id="pct-novice">0%</span>
 </div>
 <div class="h-2 w-full bg-white/20 rounded-full overflow-hidden">
-<div class="h-full bg-white/50 w-[43%] rounded-full"></div>
+<div id="bar-novice" class="h-full bg-white/50 w-[0%] rounded-full"></div>
 </div>
 </div>
 </div>
@@ -329,19 +302,91 @@
 </div>
 </nav>
 <script>
-        // Simple micro-interactions for interactive tiles
         document.querySelectorAll('.active\\:scale-95').forEach(button => {
-            button.addEventListener('touchstart', () => {
-                button.classList.add('pressed-tile');
-            });
-            button.addEventListener('touchend', () => {
-                button.classList.remove('pressed-tile');
-            });
+            button.addEventListener('mousedown', () => button.style.transform = 'scale(0.95)');
+            button.addEventListener('mouseup', () => button.style.transform = 'scale(1)');
+            button.addEventListener('mouseleave', () => button.style.transform = 'scale(1)');
         });
 
-        // Dynamic date injection for the chart subtext if needed
-        const today = new Date();
-        const options = { month: 'long', day: 'numeric' };
-        console.log("Analytics initialized for: " + today.toLocaleDateString('id-ID', options));
+        // Sync Data & Leaderboard
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const [questionsRes, participantsRes, leaderboardRes] = await Promise.all([
+                    fetch('/api/questions'),
+                    fetch('/api/participants'),
+                    fetch('/api/leaderboard')
+                ]);
+                
+                const questions = await questionsRes.json();
+                const participants = await participantsRes.json();
+                const leaderboard = await leaderboardRes.json();
+
+                // 1. Sync Total Soal
+                document.getElementById('total-soal-val').innerText = questions.length || 0;
+                document.getElementById('total-soal-label').innerText = 'Total Soal';
+                
+                // 2. Sync Active Players
+                document.getElementById('active-players-val').innerText = participants.length || 0;
+
+                // 3. Sync Distribusi Level
+                const totalParticipants = participants.length || 1;
+                document.getElementById('total-terdaftar').innerText = `Total ${participants.length || 0} pemain terdaftar`;
+                
+                let novice = 0, expert = 0, master = 0;
+                (participants || []).forEach(p => {
+                    const lvl = p.current_level || 0;
+                    if (lvl >= 40) master++;
+                    else if (lvl >= 20) expert++;
+                    else novice++;
+                });
+                
+                const pctMaster = Math.round((master / totalParticipants) * 100);
+                const pctExpert = Math.round((expert / totalParticipants) * 100);
+                const pctNovice = Math.round((novice / totalParticipants) * 100);
+                
+                document.getElementById('pct-master').innerText = pctMaster + '%';
+                document.getElementById('bar-master').style.width = pctMaster + '%';
+                
+                document.getElementById('pct-expert').innerText = pctExpert + '%';
+                document.getElementById('bar-expert').style.width = pctExpert + '%';
+                
+                document.getElementById('pct-novice').innerText = pctNovice + '%';
+                document.getElementById('bar-novice').style.width = pctNovice + '%';
+
+                // 4. Render Leaderboard Top 5
+                const lbContainer = document.getElementById('leaderboard-list');
+                lbContainer.innerHTML = '';
+                
+                const top5 = (leaderboard || []).slice(0, 5);
+                if(top5.length === 0) {
+                    lbContainer.innerHTML = '<p class="text-on-surface-variant text-sm">Belum ada data leaderboard.</p>';
+                } else {
+                    top5.forEach((p, index) => {
+                        let trophy = `#${index + 1}`;
+                        if (index === 0) trophy = '🏆';
+                        if (index === 1) trophy = '🥈';
+                        if (index === 2) trophy = '🥉';
+                        
+                        lbContainer.innerHTML += `
+                            <div class="bg-surface-container-lowest p-4 rounded-xl border border-surface-variant flex items-center gap-4 transition-all duration-200 active:scale-95">
+                                <div class="w-10 h-10 rounded-full ${index < 3 ? 'bg-secondary-container text-on-secondary-container' : 'bg-surface-variant text-on-surface-variant'} flex items-center justify-center shrink-0 font-bold">
+                                    ${trophy}
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-label-bold text-on-surface line-clamp-1">${p.username}</p>
+                                    <p class="text-xs text-on-surface-variant">Level: ${p.current_level || 0}</p>
+                                </div>
+                                <div class="text-right shrink-0">
+                                    <p class="text-[10px] font-bold text-outline">SKOR</p>
+                                    <span class="text-sm font-bold text-primary">${p.score || 0}</span>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+            } catch (e) {
+                console.error('Failed to sync analytics:', e);
+            }
+        });
     </script>
 </body></html>
