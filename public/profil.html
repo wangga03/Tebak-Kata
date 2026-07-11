@@ -201,7 +201,7 @@
 </section>
 <!-- Action Buttons -->
 <div class="flex flex-col gap-4 mt-10">
-<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-headline-lg-mobile text-body-md shadow-lg squishy-press transition-all duration-200 border-b-[3px] border-black/20 flex items-center justify-center gap-2">
+<button id="btn-save" class="w-full bg-primary text-on-primary py-4 rounded-xl font-headline-lg-mobile text-body-md shadow-lg squishy-press transition-all duration-200 border-b-[3px] border-black/20 flex items-center justify-center gap-2">
                 Simpan Perubahan
                 <span class="material-symbols-outlined">save</span>
 </button>
@@ -249,4 +249,6 @@
             btn.addEventListener('touchend', () => btn.classList.remove('scale-95'));
         });
     </script>
+    <script src="js/db.js"></script>
+    <script src="js/profil.js"></script>
 </body></html>

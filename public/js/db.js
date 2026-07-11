@@ -54,3 +54,36 @@ async function deleteQuestion(id) {
         throw error;
     }
 }
+
+async function getAdminProfile() {
+    try {
+        const response = await fetch('/api/get-admin');
+        if (!response.ok) throw new Error('Network response was not ok');
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching admin:', error);
+        return { username: '' };
+    }
+}
+
+async function updateAdminProfile(username, password) {
+    try {
+        const response = await fetch('/api/update-admin', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+        
+        const data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.details || data.error || 'Network response was not ok');
+        }
+        return data;
+    } catch (error) {
+        console.error('Error updating admin:', error);
+        alert('Error Server: ' + error.message);
+        throw error;
+    }
+}
