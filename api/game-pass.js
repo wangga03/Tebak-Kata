@@ -19,7 +19,12 @@ module.exports = async function handler(req, res) {
     if (req.method === 'GET') {
         try {
             const results = await conn.execute('SELECT * FROM game_settings WHERE id = 1');
-            return res.status(200).json(results.rows[0]);
+            // Check if results exists and has elements
+            if (results && results.length > 0) {
+                return res.status(200).json(results[0]);
+            } else {
+                return res.status(200).json({ game_pass: '-', is_pass_active: false, is_game_started: false });
+            }
         } catch (error) {
             return res.status(500).json({ error: error.message });
         }
