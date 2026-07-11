@@ -182,7 +182,35 @@
 <span class="text-label-bold text-[13px]">Analytics</span>
 </div>
 </div>
-<!-- Section Title & Add Action -->
+<!-- Game Session Control -->
+<div class="mb-8 bg-surface-container-lowest p-6 rounded-2xl border border-surface-variant tile-shadow">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline-lg-mobile text-[20px] text-on-surface">Game Session Control</h2>
+<div id="game-status-badge" class="flex items-center gap-2 bg-error/10 px-3 py-1 rounded-full border border-error/20">
+<div class="w-2 h-2 rounded-full bg-error"></div>
+<span class="text-[11px] font-bold text-error">Belum Mulai</span>
+</div>
+</div>
+<div class="bg-primary-fixed/30 p-4 rounded-xl border border-primary-fixed mb-6 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">Game Pass Code</span>
+<h3 id="game-pass-text" class="text-headline-lg-mobile text-primary font-bold">-</h3>
+</div>
+<div class="flex gap-2">
+    <button onclick="toggleGamePass()" id="toggle-pass-btn" class="p-3 bg-error text-on-error rounded-xl squishy-btn shadow-sm" title="Toggle Pass">
+    <span class="material-symbols-outlined" id="toggle-pass-icon">lock</span>
+    </button>
+    <button onclick="generateGamePass()" class="p-3 bg-primary text-on-primary rounded-xl squishy-btn shadow-sm" title="Generate New">
+    <span class="material-symbols-outlined">refresh</span>
+    </button>
+</div>
+</div>
+<button onclick="startGame()" id="start-game-btn" class="w-full flex items-center justify-center gap-3 py-4 px-6 bg-primary text-on-primary rounded-2xl font-label-bold text-[18px] squishy-btn shadow-lg hover:bg-primary-container transition-all">
+<span class="material-symbols-outlined text-[24px]">play_circle</span>
+        Mulai Game Sekarang
+    </button>
+</div>
+
 <!-- Participant Management Section -->
 <div class="mb-8">
 <div class="flex items-center justify-between mb-4">
@@ -347,5 +375,80 @@
         });
     </script>
     <script src="js/db.js"></script>
+    <script>
+        let isPassActive = false;
+        let isGameStarted = false;
+
+        async function loadGamePass() {
+            try {
+                const res = await fetch('/api/game-pass');
+                const data = await res.json();
+                isPassActive = data.is_pass_active;
+                isGameStarted = data.is_game_started;
+                
+                document.getElementById('game-pass-text').innerText = data.game_pass;
+                
+                const toggleBtn = document.getElementById('toggle-pass-btn');
+                const toggleIcon = document.getElementById('toggle-pass-icon');
+                if (isPassActive) {
+                    toggleBtn.className = 'p-3 bg-green-500 text-white rounded-xl squishy-btn shadow-sm';
+                    toggleIcon.innerText = 'lock_open';
+                } else {
+                    toggleBtn.className = 'p-3 bg-error text-on-error rounded-xl squishy-btn shadow-sm';
+                    toggleIcon.innerText = 'lock';
+                }
+
+                const statusBadge = document.getElementById('game-status-badge');
+                const startBtn = document.getElementById('start-game-btn');
+                if (isGameStarted) {
+                    statusBadge.className = 'flex items-center gap-2 bg-green-500/10 px-3 py-1 rounded-full border border-green-500/20';
+                    statusBadge.innerHTML = '<div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div><span class="text-[11px] font-bold text-green-500">Mulai</span>';
+                    startBtn.className = 'w-full flex items-center justify-center gap-3 py-4 px-6 bg-error text-on-error rounded-2xl font-label-bold text-[18px] squishy-btn shadow-lg hover:bg-error-container transition-all';
+                    startBtn.innerHTML = '<span class="material-symbols-outlined text-[24px]">stop_circle</span> Hentikan Game';
+                } else {
+                    statusBadge.className = 'flex items-center gap-2 bg-error/10 px-3 py-1 rounded-full border border-error/20';
+                    statusBadge.innerHTML = '<div class="w-2 h-2 rounded-full bg-error"></div><span class="text-[11px] font-bold text-error">Belum Mulai</span>';
+                    startBtn.className = 'w-full flex items-center justify-center gap-3 py-4 px-6 bg-primary text-on-primary rounded-2xl font-label-bold text-[18px] squishy-btn shadow-lg hover:bg-primary-container transition-all';
+                    startBtn.innerHTML = '<span class="material-symbols-outlined text-[24px]">play_circle</span> Mulai Game Sekarang';
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        async function generateGamePass() {
+            const pass = 'WF-' + Math.floor(1000 + Math.random() * 9000);
+            await fetch('/api/game-pass', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action: 'activate', game_pass: pass })
+            });
+            loadGamePass();
+        }
+
+        async function toggleGamePass() {
+            const action = isPassActive ? 'deactivate' : 'activate';
+            const pass = action === 'activate' ? ('WF-' + Math.floor(1000 + Math.random() * 9000)) : '-';
+            await fetch('/api/game-pass', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action, game_pass: pass })
+            });
+            loadGamePass();
+        }
+
+        async function startGame() {
+            const action = isGameStarted ? 'stop_game' : 'start_game';
+            await fetch('/api/game-pass', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ action })
+            });
+            loadGamePass();
+        }
+
+        document.addEventListener('DOMContentLoaded', loadGamePass);
+        setInterval(loadGamePass, 3000);
+    </script>
     <script src="js/kelola.js"></script>
 </body></html>
