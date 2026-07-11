@@ -4,6 +4,9 @@ const mysql = require('mysql2/promise');
 // This is essential for serverless environments
 const pool = mysql.createPool({
     uri: process.env.MYSQL_DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: true
+    },
     waitForConnections: true,
     connectionLimit: 10,
     maxIdle: 10, // max idle connections, the default value is the same as `connectionLimit`
