@@ -1,12 +1,5 @@
-const mysql = require('mysql2/promise');
+const { connect } = require('@tidbcloud/serverless');
 
-let url = process.env.MYSQL_DATABASE_URL;
+const conn = connect({ url: process.env.MYSQL_DATABASE_URL });
 
-// Pastikan parameter keamanan SSL ada di dalam URL
-if (url && !url.includes('ssl=')) {
-    url += (url.includes('?') ? '&' : '?') + 'ssl={"rejectUnauthorized":true}';
-}
-
-const pool = mysql.createPool(url);
-
-module.exports = pool;
+module.exports = conn;

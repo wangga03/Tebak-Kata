@@ -1,19 +1,8 @@
-const pool = require('./db');
+const conn = require('./db');
 
 module.exports = async (req, res) => {
-    // Enable CORS if needed
-    res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-    res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version');
-
-    if (req.method === 'OPTIONS') {
-        res.status(200).end();
-        return;
-    }
-
     if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method Not Allowed' });
+        return res.status(405).json({ error: 'Method not allowed' });
     }
 
     const { question, answer, level, category } = req.body;
@@ -23,14 +12,14 @@ module.exports = async (req, res) => {
     }
 
     try {
-        const [result] = await pool.query(
-            'INSERT INTO questions (question, answer, level, category, created_at) VALUES (?, ?, ?, ?, NOW())',
+        const result = await conn.execute(
+            'INSERT INTO questions (question, answer, level, category) VALUES (?, ?, ?, ?)',
             [question, answer, level, category || 'General']
         );
         
         res.status(201).json({ 
             success: true, 
-            id: result.insertId.toString(),
+            id: result.lastInsertId ? result.lastInsertId.toString() : "1",
             message: 'Question added successfully' 
         });
     } catch (err) {

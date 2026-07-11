@@ -10,10 +10,10 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
-  "dependencies": {
-    "mysql2": "^3.22.6"
-  },
   "devDependencies": {
     "vercel": "^55.0.0"
+  },
+  "dependencies": {
+    "@tidbcloud/serverless": "^0.3.0"
   }
 }

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>WordFlow - Profil Pengguna</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline": "#7b7487",
+                    "on-background": "#191c1e",
+                    "surface-dim": "#d8dadc",
+                    "primary-container": "#7c3aed",
+                    "tertiary-fixed-dim": "#ffb0cd",
+                    "on-primary": "#ffffff",
+                    "on-surface": "#191c1e",
+                    "on-tertiary-fixed-variant": "#8c0053",
+                    "error-container": "#ffdad6",
+                    "secondary": "#735c00",
+                    "background": "#f7f9fb",
+                    "surface-container-high": "#e6e8ea",
+                    "on-tertiary-container": "#ffdde7",
+                    "secondary-fixed": "#ffe083",
+                    "tertiary-container": "#bf2076",
+                    "on-secondary-fixed": "#231b00",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#f7f9fb",
+                    "primary-fixed-dim": "#d2bbff",
+                    "primary-fixed": "#eaddff",
+                    "on-surface-variant": "#4a4455",
+                    "error": "#ba1a1a",
+                    "on-tertiary": "#ffffff",
+                    "on-tertiary-fixed": "#3e0022",
+                    "tertiary-fixed": "#ffd9e4",
+                    "secondary-fixed-dim": "#eec200",
+                    "surface-container-low": "#f2f4f6",
+                    "outline-variant": "#ccc3d8",
+                    "on-primary-fixed-variant": "#5a00c6",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#9b005c",
+                    "secondary-container": "#fed01b",
+                    "surface-container-highest": "#e0e3e5",
+                    "inverse-surface": "#2d3133",
+                    "inverse-on-surface": "#eff1f3",
+                    "inverse-primary": "#d2bbff",
+                    "on-primary-container": "#ede0ff",
+                    "surface-tint": "#732ee4",
+                    "on-primary-fixed": "#25005a",
+                    "surface-container": "#eceef0",
+                    "surface-bright": "#f7f9fb",
+                    "on-secondary-fixed-variant": "#574500",
+                    "surface-variant": "#e0e3e5",
+                    "primary": "#630ed4",
+                    "on-secondary-container": "#6f5900"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "gutter": "12px",
+                    "margin-desktop": "32px",
+                    "tile-gap": "8px",
+                    "margin-mobile": "16px",
+                    "base-unit": "4px"
+            },
+            "fontFamily": {
+                    "tile-text": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "label-bold": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "tile-text": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "800"}],
+                    "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .squishy-press:active {
+            transform: scale(0.95);
+        }
+        .tile-shadow {
+            box-shadow: 0 4px 0 0 rgba(99, 14, 212, 0.2);
+        }
+        .tile-press:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+        .glass-blur {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 bg-surface dark:bg-inverse-surface shadow-sm">
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-primary dark:text-inverse-primary hover:bg-surface-variant/50 p-2 rounded-full transition-transform duration-150 scale-95">menu</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary dark:text-inverse-primary">WordFlow</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A clean, professional studio headshot of a friendly young administrator in a brightly lit modern office environment. The style is high-end digital photography with a soft bokeh background and vibrant, warm lighting that matches the energetic WordFlow brand identity. The user has a warm smile, conveying a sense of intellectual stimulation and support." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCL3wk2Xlgg86lGFVaE6hHdBycep3xxDtm0Y4unPI1VQUJy2jbYWuesKmuKkkUU2wpNSTT7q2bQ9f6vJ3I6wLDjjaHFgiEE7AGT8pvAgk_dshCeI20K-174igN-ij7U8QwBHzrtU013z-1tQJ0688kgo-PvB_xO6cUNil5VGkTMI7PuRwYKrmH4eOjZK15JtVEnigmUpFZpXFl8QqmJh49dhLVONVQTXYukmHh3ZZheTX6LjwNFO6s"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-20 pb-28 px-margin-mobile max-w-[480px] mx-auto">
+<!-- Profile Hero Section -->
+<div class="flex flex-col items-center mb-8">
+<div class="relative group">
+<div class="w-24 h-24 rounded-full border-4 border-primary-container p-1 bg-surface-container-lowest shadow-lg">
+<img class="w-full h-full rounded-full object-cover" data-alt="A detailed digital avatar of a Super Admin character in a minimalist 3D style. The character is set against a vibrant purple background with geometric word-puzzle elements floating nearby. Soft studio lighting highlights the tactile textures of the character's clothing and the glossy finish of the avatar's surface, consistent with a premium gaming interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHmIVDxFSOav7axxYk6MrPEAe69mWOZsFPlA-hcKySWWK5BlpjTfJnXpXQZcabXYK00O2Pb6_Oq0ZKyBPyVbhu_at0ghHJxiS0XTMxZdQs_AHxzPjJpsj9K0N1ma1C1MzMyyUf0cFEN5rQVtjOp7AlOv32n986JI4JWmyakh4X77J84k1kTnfZnni44jSXjFxozPph3v9mU0Q9O_Z4UjRF3TWZr2FsOiLvkaXJ6QX-ml7-iPCisfg"/>
+</div>
+<button class="absolute bottom-0 right-0 bg-primary text-on-primary p-2 rounded-full shadow-md hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+<h2 class="mt-4 font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Alex Rivera</h2>
+<div class="mt-1 bg-secondary-container text-on-secondary-container px-3 py-0.5 rounded-full font-label-bold text-label-bold">
+                Super Admin
+            </div>
+</div>
+<!-- Section: Account Settings -->
+<section class="mb-8">
+<h3 class="font-label-bold text-label-bold text-outline uppercase tracking-wider mb-4 px-2">Profil Pengguna</h3>
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm space-y-6">
+<!-- Username Field -->
+<div class="flex flex-col gap-1">
+<label class="font-label-bold text-label-bold text-on-surface-variant" for="username">Username</label>
+<div class="relative group">
+<input class="w-full bg-transparent border-b-2 border-outline-variant focus:border-primary focus:ring-0 py-2 font-body-md text-body-md transition-colors outline-none" id="username" type="text" value="alex_rivera_flow"/>
+<span class="absolute right-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline-variant group-focus-within:text-primary">person</span>
+</div>
+</div>
+<!-- Email Field (Read-only aesthetic) -->
+<div class="flex flex-col gap-1 opacity-70">
+<label class="font-label-bold text-label-bold text-on-surface-variant">Email</label>
+<div class="py-2 font-body-md text-body-md border-b-2 border-outline-variant/30 flex justify-between items-center">
+                        alex.rivera@wordflow.app
+                        <span class="material-symbols-outlined text-sm">lock</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section: Password Management -->
+<section class="mb-8">
+<h3 class="font-label-bold text-label-bold text-outline uppercase tracking-wider mb-4 px-2">Ganti Password</h3>
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm space-y-6">
+<!-- New Password -->
+<div class="flex flex-col gap-1">
+<label class="font-label-bold text-label-bold text-on-surface-variant" for="new_password">Password Baru</label>
+<div class="relative group">
+<input class="w-full bg-transparent border-b-2 border-outline-variant focus:border-primary focus:ring-0 py-2 font-body-md text-body-md transition-colors outline-none" id="new_password" placeholder="••••••••" type="password"/>
+<span class="absolute right-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline-variant group-focus-within:text-primary">key</span>
+</div>
+</div>
+<!-- Confirm Password -->
+<div class="flex flex-col gap-1">
+<label class="font-label-bold text-label-bold text-on-surface-variant" for="confirm_password">Konfirmasi Password Baru</label>
+<div class="relative group">
+<input class="w-full bg-transparent border-b-2 border-outline-variant focus:border-primary focus:ring-0 py-2 font-body-md text-body-md transition-colors outline-none" id="confirm_password" placeholder="••••••••" type="password"/>
+<span class="absolute right-0 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline-variant group-focus-within:text-primary">verified_user</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Action Buttons -->
+<div class="flex flex-col gap-4 mt-10">
+<button class="w-full bg-primary text-on-primary py-4 rounded-xl font-headline-lg-mobile text-body-md shadow-lg squishy-press transition-all duration-200 border-b-[3px] border-black/20 flex items-center justify-center gap-2">
+                Simpan Perubahan
+                <span class="material-symbols-outlined">save</span>
+</button>
+<button class="w-full py-4 rounded-xl font-label-bold text-error bg-error-container/20 hover:bg-error-container/40 border-2 border-dashed border-error-container transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe max-w-[480px] left-1/2 -translate-x-1/2 bg-surface dark:bg-inverse-surface shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all duration-200 scale-90" href="#">
+<span class="material-symbols-outlined">videogame_asset</span>
+<span class="font-label-sm text-label-sm">Play</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all duration-200 scale-90" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="font-label-sm text-label-sm">Review</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest rounded-lg transition-all duration-200 scale-90" href="#">
+<span class="material-symbols-outlined">settings_suggest</span>
+<span class="font-label-sm text-label-sm">Manage</span>
+</a>
+<!-- Active Tab: Profile -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200 scale-90 shadow-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions for input fields
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.parentElement.classList.add('scale-[1.02]');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.parentElement.classList.remove('scale-[1.02]');
+            });
+        });
+
+        // Basic button press effect
+        const buttons = document.querySelectorAll('button');
+        buttons.forEach(btn => {
+            btn.addEventListener('touchstart', () => btn.classList.add('scale-95'));
+            btn.addEventListener('touchend', () => btn.classList.remove('scale-95'));
+        });
+    </script>
+</body></html>

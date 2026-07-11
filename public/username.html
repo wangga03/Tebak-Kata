@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+
+<html class="light" lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>WordFlow - Siap Bermain?</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-dim": "#d8dadc",
+                    "on-secondary-fixed": "#231b00",
+                    "error-container": "#ffdad6",
+                    "on-primary-container": "#ede0ff",
+                    "tertiary-fixed-dim": "#ffb0cd",
+                    "secondary-container": "#fed01b",
+                    "on-primary-fixed": "#25005a",
+                    "surface-variant": "#e0e3e5",
+                    "secondary-fixed": "#ffe083",
+                    "secondary": "#735c00",
+                    "surface-bright": "#f7f9fb",
+                    "on-error-container": "#93000a",
+                    "tertiary-container": "#bf2076",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "background": "#f7f9fb",
+                    "surface": "#f7f9fb",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#7c3aed",
+                    "on-tertiary-fixed-variant": "#8c0053",
+                    "on-tertiary-fixed": "#3e0022",
+                    "inverse-on-surface": "#eff1f3",
+                    "error": "#ba1a1a",
+                    "on-surface-variant": "#4a4455",
+                    "primary-fixed": "#eaddff",
+                    "secondary-fixed-dim": "#eec200",
+                    "inverse-surface": "#2d3133",
+                    "on-primary-fixed-variant": "#5a00c6",
+                    "on-secondary-container": "#6f5900",
+                    "tertiary": "#9b005c",
+                    "on-tertiary-container": "#ffdde7",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#191c1e",
+                    "on-surface": "#191c1e",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-container-low": "#f2f4f6",
+                    "outline-variant": "#ccc3d8",
+                    "outline": "#7b7487",
+                    "primary-fixed-dim": "#d2bbff",
+                    "tertiary-fixed": "#ffd9e4",
+                    "surface-container-high": "#e6e8ea",
+                    "surface-tint": "#732ee4",
+                    "surface-container": "#eceef0",
+                    "primary": "#630ed4",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-primary": "#d2bbff",
+                    "on-secondary-fixed-variant": "#574500"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-desktop": "32px",
+                    "base-unit": "4px",
+                    "tile-gap": "8px",
+                    "margin-mobile": "16px",
+                    "gutter": "12px"
+            },
+            "fontFamily": {
+                    "tile-text": ["Plus Jakarta Sans"],
+                    "label-bold": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "tile-text": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "800"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .tile-bounce {
+            animation: bounce 2s infinite ease-in-out;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .floating {
+            animation: float 3s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(5px, -5px) rotate(2deg); }
+            66% { transform: translate(-3px, 5px) rotate(-1deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .btn-press:active {
+            transform: scale(0.95);
+        }
+
+        .input-glow:focus-within {
+            box-shadow: 0 0 0 2px theme('colors.primary-container');
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface overflow-x-hidden">
+<!-- TopAppBar -->
+<nav class="w-full top-0 sticky bg-surface shadow-sm z-40">
+<div class="flex justify-between items-center px-margin-mobile h-16 max-w-[480px] mx-auto">
+<button class="text-primary hover:opacity-80 transition-opacity active:scale-95 duration-100 transition-transform">
+<span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tight">WordFlow</h1>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-fixed">
+<img class="w-full h-full object-cover" data-alt="A professional and friendly user profile avatar for a word game application. The avatar features a stylized, minimalist character with a warm smile, set against a vibrant purple background that matches the WordFlow brand identity. The illustration is clean and modern, using soft gradients and friendly geometric shapes." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgROuVFdciaMZt22HW_jg81sRE366XPnRSYVTeW88cxCjjQ7xN_lnYGQWd5lyLN82Udblj06Z93xLhaAespb24cwVgx0uGp3BZwl3JZ1d2oCkDzLgJS_9BILuXjXQErghxbtCJV6WbMm-bquKjC75GE9XwP3oLgy0fIDQg2nJXSm6BS-PBfhg1q4OtFTy162BJp39aKrzJ0nLBRFs2OjpFWmViZjnv7Jxvx3q0kyEzRJdp6cFRwqc"/>
+</div>
+</div>
+</nav>
+<!-- Main Content Container -->
+<main class="max-w-[480px] mx-auto px-margin-mobile pt-8 pb-32 min-h-[calc(100vh-64px)] relative flex flex-col items-center">
+<!-- Decorative Floating Tiles -->
+<div class="absolute top-10 left-4 floating opacity-20 pointer-events-none">
+<div class="w-12 h-12 bg-secondary-fixed rounded-xl flex items-center justify-center border-b-[3px] border-secondary font-tile-text text-tile-text text-secondary">A</div>
+</div>
+<div class="absolute top-24 right-6 floating opacity-20 pointer-events-none" style="animation-delay: -1.5s">
+<div class="w-14 h-14 bg-primary-fixed rounded-xl flex items-center justify-center border-b-[3px] border-primary font-tile-text text-tile-text text-primary">W</div>
+</div>
+<div class="absolute bottom-40 left-8 floating opacity-20 pointer-events-none" style="animation-delay: -0.7s">
+<div class="w-10 h-10 bg-tertiary-fixed rounded-xl flex items-center justify-center border-b-[3px] border-tertiary font-tile-text text-tile-text text-tertiary">O</div>
+</div>
+<!-- Greeting Section -->
+<header class="text-center mb-10 w-full animate-in fade-in slide-in-from-bottom-4 duration-700">
+<div class="inline-block p-4 bg-secondary-container rounded-full mb-6 tile-bounce">
+<span class="material-symbols-outlined text-on-secondary-container text-5xl" style="font-variation-settings: 'FILL' 1;">celebration</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-2">Siap Bermain?</h2>
+<p class="text-on-surface-variant font-body-md px-4">Masukkan namamu untuk memulai tantangan kata.</p>
+</header>
+<!-- Input Section Card -->
+<section class="w-full bg-surface-container-lowest rounded-[32px] p-8 shadow-sm border border-outline-variant/30 animate-in fade-in slide-in-from-bottom-8 duration-700 delay-150">
+<div class="space-y-6">
+<!-- Username Input -->
+<div class="space-y-2">
+<label class="font-label-bold text-label-bold text-on-surface-variant ml-1" for="username">Nama Pemain</label>
+<div class="relative flex items-center group input-glow rounded-xl transition-all duration-300">
+<div class="absolute left-4 text-primary">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</div>
+<input class="w-full bg-surface-container-low border-none rounded-xl py-4 pl-12 pr-4 font-body-md text-on-surface focus:ring-0 placeholder:text-outline" id="username" placeholder="Contoh: KataMaster" type="text"/>
+</div>
+</div>
+<!-- Action Button -->
+<button onclick="localStorage.setItem('username', document.getElementById('username').value || 'Pemain'); window.location.href='game.html'" class="w-full bg-primary text-on-primary py-5 rounded-2xl font-headline-lg-mobile text-xl shadow-lg shadow-primary/20 btn-press transition-all duration-200 flex items-center justify-center gap-3">
+<span>Mulai Main</span>
+<span class="material-symbols-outlined" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+</div>
+<!-- Fun Tip -->
+<div class="mt-8 flex items-start gap-3 bg-secondary-fixed/30 p-4 rounded-2xl border border-secondary-fixed/50">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<p class="text-on-secondary-fixed-variant text-sm font-medium">Tip: Gunakan nama yang keren agar lawanmu merasa tertantang!</p>
+</div>
+</section>
+<!-- Decorative Illustration -->
+<div class="mt-12 w-full max-w-[200px] opacity-80">
+<img class="w-full h-auto drop-shadow-md" data-alt="A playful, colorful 3D-style illustration of several alphabet tiles stacked neatly like blocks. The tiles are vibrant purple, sunny yellow, and soft pink, with white letters. Surrounding them are small energetic sparks and stars, symbolizing the 'flow' and excitement of the WordFlow game. The background is transparent or matches the clean white of the app." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA3gRJslFn-njqefdko_vOWSWEMOPneLH5X0gZrar0ulpEwWenbSN4Ogh8RfuWTtqa7czZKA7yBqi4Z3kRrtb4J-UvKECVcaMpq6Ih2az5EdoKIOfrVQnRRfYISpMgoIIWyVaxIuvzrA7GKHX1UyEzFVZWGAgtM3Gm_V3PYDIG6Ly0lsej75vgLCdhwItgckLSUDfIktXR6TuEFKPy1n--qiv5hcHSeShPgB2t-q4-Cqefjqb2kyh8"/>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 right-0 flex justify-around items-center h-20 px-4 pb-safe max-w-[480px] mx-auto bg-surface-container-lowest border-t border-outline-variant/30 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.05)] z-50 rounded-t-xl">
+<!-- Play (Active) -->
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="play_circle" style="font-variation-settings: 'FILL' 1;">play_circle</span>
+<span class="font-label-sm text-label-sm">Play</span>
+</a>
+<!-- Review -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="rate_review">rate_review</span>
+<span class="font-label-sm text-label-sm">Review</span>
+</a>
+<!-- Manage -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span>
+<span class="font-label-sm text-label-sm">Manage</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-high rounded-full transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<script>
+        // Micro-interaction for input focus
+        const input = document.getElementById('username');
+        const icon = input.previousElementSibling;
+        
+        input.addEventListener('focus', () => {
+            icon.classList.add('scale-110');
+            icon.style.transition = 'transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        });
+        
+        input.addEventListener('blur', () => {
+            icon.classList.remove('scale-110');
+        });
+
+        // Add "active" class logic based on button interaction
+        const startBtn = document.querySelector('button.bg-primary');
+        startBtn.addEventListener('click', function() {
+            if(input.value.trim() === '') {
+                input.parentElement.classList.add('ring-2', 'ring-error');
+                setTimeout(() => input.parentElement.classList.remove('ring-2', 'ring-error'), 1000);
+            } else {
+                this.innerHTML = `
+                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Memulai...</span>
+                `;
+                // Logic to transition to next screen would go here
+            }
+        });
+    </script>
+</body></html>
