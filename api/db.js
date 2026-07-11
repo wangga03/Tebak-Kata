@@ -1,16 +1,24 @@
 const mysql = require('mysql2/promise');
 
-// Create a connection pool instead of a single connection
-// This is essential for serverless environments
+// 1. Ekstrak informasi dari URL Vercel secara manual
+const dbUrl = new URL(process.env.MYSQL_DATABASE_URL);
+const dbPassword = decodeURIComponent(dbUrl.password); // Mencegah karakter spesial rusak
+
+// 2. Buat koneksi secara absolut (memaksa SSL aktif)
 const pool = mysql.createPool({
-    uri: process.env.MYSQL_DATABASE_URL,
+    host: dbUrl.hostname,
+    port: dbUrl.port || 4000,
+    user: dbUrl.username,
+    password: dbPassword,
+    database: dbUrl.pathname.replace('/', '') || 'test',
     ssl: {
+        minVersion: 'TLSv1.2',
         rejectUnauthorized: true
     },
     waitForConnections: true,
     connectionLimit: 10,
-    maxIdle: 10, // max idle connections, the default value is the same as `connectionLimit`
-    idleTimeout: 60000, // idle connections timeout, in milliseconds, the default value 60000
+    maxIdle: 10,
+    idleTimeout: 60000,
     queueLimit: 0,
     enableKeepAlive: true,
     keepAliveInitialDelay: 0
