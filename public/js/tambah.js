@@ -29,11 +29,17 @@ document.addEventListener('DOMContentLoaded', () => {
         btnSave.disabled = true;
 
         try {
-            await addQuestion(questionText, answerText, levelNum, 'General');
+            await addQuestion({
+                question: questionText,
+                answer: answerText,
+                levelText: selectedDiff,
+                category: 'General'
+            });
             // Go back
             window.location.href = 'kelola_soal.html';
         } catch (err) {
             console.error(err);
+            alert('Gagal menyimpan soal: ' + err.message);
             btnSave.innerHTML = `<span class="material-symbols-outlined" data-weight="fill">save</span><span>Simpan Soal</span>`;
             btnSave.disabled = false;
         }
