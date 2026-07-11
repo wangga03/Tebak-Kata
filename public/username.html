@@ -136,7 +136,7 @@
       min-height: max(884px, 100dvh);
     }
   </style>
-  </head>
+</head>
 <body class="bg-surface font-body-md text-on-surface overflow-x-hidden">
 <!-- TopAppBar -->
 <nav class="w-full top-0 sticky bg-surface shadow-sm z-40">
@@ -182,33 +182,64 @@
 </div>
 <input class="w-full bg-surface-container-low border-none rounded-xl py-4 pl-12 pr-4 font-body-md text-on-surface focus:ring-0 placeholder:text-outline" id="username" placeholder="Contoh: KataMaster" type="text"/>
 </div>
+</div><div class="space-y-2">
+<label class="font-label-bold text-label-bold text-on-surface-variant ml-1" for="gamepass">Game Pass</label>
+<div class="relative flex items-center group input-glow rounded-xl transition-all duration-300">
+<div class="absolute left-4 text-primary">
+<span class="material-symbols-outlined">confirmation_number</span>
+</div>
+<input class="w-full bg-surface-container-low border-none rounded-xl py-4 pl-12 pr-4 font-body-md text-on-surface focus:ring-0 placeholder:text-outline" id="gamepass" placeholder="Contoh: WF-2024" type="text"/>
+</div>
 </div>
 <!-- Action Button -->
-<button onclick="registerParticipant()" id="btn-start" class="w-full bg-primary text-on-primary py-5 rounded-2xl font-headline-lg-mobile text-xl shadow-lg shadow-primary/20 btn-press transition-all duration-200 flex items-center justify-center gap-3">
-<span>Mulai Main</span>
-<span class="material-symbols-outlined" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
-</button>
-</div>
+<button onclick="registerParticipant()" class="w-full bg-primary text-on-primary py-5 rounded-2xl font-headline-lg-mobile text-xl shadow-lg shadow-primary/20 btn-press transition-all duration-200 flex items-center justify-center gap-3"><span>Validasi &amp; Main</span>
 <script>
-    async function registerParticipant() {
-        const username = document.getElementById('username').value.trim() || 'Pemain';
-        localStorage.setItem('username', username);
-        const btn = document.getElementById('btn-start');
-        btn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-weight="fill">refresh</span> Menyimpan...';
-        btn.disabled = true;
-        
-        try {
-            await fetch('/api/add-participant', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ username })
-            });
-        } catch (e) {
-            console.error(e);
-        }
-        window.location.href = 'game.html';
+async function registerParticipant() {
+    const username = document.getElementById('username').value.trim();
+    const gamepass = document.getElementById('gamepass').value.trim();
+    
+    if (!username || !gamepass) {
+        alert('Mohon isi Username dan Game Pass!');
+        return;
     }
+    
+    try {
+        const btn = document.querySelector('button[onclick="registerParticipant()"]');
+        const oldText = btn.innerHTML;
+        btn.innerHTML = '<span>Memverifikasi...</span>';
+        btn.style.pointerEvents = 'none';
+
+        const passRes = await fetch('/api/game-pass');
+        const passData = await passRes.json();
+        
+        if (!passData.is_pass_active || passData.game_pass !== gamepass) {
+            alert('Game Pass tidak valid atau sesi belum dibuka!');
+            btn.innerHTML = oldText;
+            btn.style.pointerEvents = 'auto';
+            return;
+        }
+
+        const res = await fetch('/api/add-participant', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username })
+        });
+        if (res.ok) {
+            localStorage.setItem('username', username);
+            window.location.href = 'ruang-tunggu.html';
+        } else {
+            alert('Gagal mendaftar, coba lagi.');
+            btn.innerHTML = oldText;
+            btn.style.pointerEvents = 'auto';
+        }
+    } catch (e) {
+        console.error(e);
+        alert('Gagal terhubung ke server.');
+    }
+}
 </script>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span></button>
+</div>
 <!-- Fun Tip -->
 <div class="mt-8 flex items-start gap-3 bg-secondary-fixed/30 p-4 rounded-2xl border border-secondary-fixed/50">
 <span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">lightbulb</span>

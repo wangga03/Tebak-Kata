@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html lang="id"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>WordFlow - Ruang Tunggu</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-bright": "#f7f9fb",
+                    "primary-fixed": "#eaddff",
+                    "tertiary-container": "#bf2076",
+                    "on-secondary-fixed": "#231b00",
+                    "on-secondary": "#ffffff",
+                    "on-background": "#191c1e",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#fed01b",
+                    "primary-container": "#7c3aed",
+                    "on-primary-container": "#ede0ff",
+                    "surface": "#f7f9fb",
+                    "error-container": "#ffdad6",
+                    "outline": "#7b7487",
+                    "on-tertiary-fixed": "#3e0022",
+                    "on-tertiary-fixed-variant": "#8c0053",
+                    "on-tertiary": "#ffffff",
+                    "on-secondary-container": "#6f5900",
+                    "on-primary-fixed": "#25005a",
+                    "tertiary-fixed-dim": "#ffb0cd",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-container-low": "#f2f4f6",
+                    "background": "#f7f9fb",
+                    "on-tertiary-container": "#ffdde7",
+                    "on-primary-fixed-variant": "#5a00c6",
+                    "surface-tint": "#732ee4",
+                    "primary": "#630ed4",
+                    "inverse-primary": "#d2bbff",
+                    "surface-variant": "#e0e3e5",
+                    "inverse-surface": "#2d3133",
+                    "secondary": "#735c00",
+                    "on-surface": "#191c1e",
+                    "surface-container-high": "#e6e8ea",
+                    "outline-variant": "#ccc3d8",
+                    "error": "#ba1a1a",
+                    "tertiary": "#9b005c",
+                    "tertiary-fixed": "#ffd9e4",
+                    "on-secondary-fixed-variant": "#574500",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-dim": "#d8dadc",
+                    "surface-container": "#eceef0",
+                    "primary-fixed-dim": "#d2bbff",
+                    "secondary-fixed-dim": "#eec200",
+                    "on-primary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "secondary-fixed": "#ffe083",
+                    "on-surface-variant": "#4a4455",
+                    "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "tile-gap": "8px",
+                    "margin-mobile": "16px",
+                    "gutter": "12px",
+                    "margin-desktop": "32px",
+                    "base-unit": "4px"
+            },
+            "fontFamily": {
+                    "tile-text": ["Plus Jakarta Sans"],
+                    "headline-lg": ["Plus Jakarta Sans"],
+                    "headline-xl": ["Plus Jakarta Sans"],
+                    "label-sm": ["Plus Jakarta Sans"],
+                    "label-bold": ["Plus Jakarta Sans"],
+                    "headline-lg-mobile": ["Plus Jakarta Sans"],
+                    "body-md": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "tile-text": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}],
+                    "label-bold": ["14px", {"lineHeight": "20px", "fontWeight": "700"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "800"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        .tile-shadow {
+            box-shadow: 0 4px 0 0 #4a4455;
+        }
+        .tile-active:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 0 #4a4455;
+        }
+        body {
+            background-color: #f7f9fb;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="flex flex-col min-h-screen text-on-surface">
+<!-- Top App Bar -->
+<header class="w-full top-0 sticky bg-surface flex justify-between items-center px-4 py-2 h-16 z-50">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-2xl">menu</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tighter">WordFlow</h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center overflow-hidden border-2 border-primary-container">
+<img class="w-full h-full object-cover" data-alt="A stylized 3D avatar of a friendly game participant, wearing colorful glasses and a trendy hoodie, designed with a clean and modern aesthetic. The lighting is bright and cheerful, set against a soft purple background to maintain brand consistency." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB32fiIgXsRUO4QrFYyRKeBUjhyfIa2_TGjVvj9Fs3HtfQRceRCoLWcyZjZbqWVcBvGjC9zcy9-XYTlEMeTUWWHCItANye_oVtt64LZw2LU3YqHmVtmbg-TQSsMXBxKrm0N6YM3IAYpX-WN0Tt02_ylJ6EMF8pFoe1ChLWz14_c7_rbaVWnCSCtGOmTrHmtoSuKhRqPrI-z85sxMOZi_JvLzHHUbCpogiqGS2q0iGyJMHmJZtHqCg0"/>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex flex-col items-center justify-center px-4 max-w-[480px] mx-auto w-full pb-24">
+<!-- Header Title Section -->
+<div class="text-center mb-8">
+<h2 class="font-headline-xl text-headline-xl text-primary mb-2">Ruang Tunggu</h2>
+<div class="inline-flex items-center gap-2 px-4 py-1 bg-secondary-container rounded-full">
+<span class="material-symbols-outlined text-on-secondary-container text-sm" style="font-variation-settings: 'FILL' 1;">timer</span>
+<p class="font-label-bold text-label-bold text-on-secondary-container">Game Pass: WF-2024-XP</p>
+</div>
+</div>
+<!-- Central Waiting Illustration/Animation -->
+<div class="relative w-full aspect-square flex items-center justify-center mb-8">
+<div class="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none">
+<div class="w-64 h-64 bg-primary-container rounded-full blur-3xl"></div>
+</div>
+<div class="animate-float z-10 flex flex-col items-center">
+<!-- Visualizing Word Tyles waiting -->
+<div class="grid grid-cols-2 gap-4">
+<div class="w-20 h-20 bg-white border-2 border-surface-variant rounded-xl flex items-center justify-center tile-shadow">
+<span class="font-tile-text text-tile-text text-primary">W</span>
+</div>
+<div class="w-20 h-20 bg-primary-container rounded-xl flex items-center justify-center tile-shadow rotate-3 translate-y-4">
+<span class="font-tile-text text-tile-text text-on-primary-container">A</span>
+</div>
+<div class="w-20 h-20 bg-secondary-container rounded-xl flex items-center justify-center tile-shadow -rotate-3 -translate-y-2">
+<span class="font-tile-text text-tile-text text-on-secondary-container">I</span>
+</div>
+<div class="w-20 h-20 bg-white border-2 border-surface-variant rounded-xl flex items-center justify-center tile-shadow translate-x-2">
+<span class="font-tile-text text-tile-text text-primary">T</span>
+</div>
+</div>
+<!-- Atmospheric Pulsing Effect -->
+<div class="mt-12 flex space-x-2">
+<div class="w-3 h-3 bg-primary rounded-full animate-bounce" style="animation-delay: 0s"></div>
+<div class="w-3 h-3 bg-primary rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+<div class="w-3 h-3 bg-primary rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+</div>
+</div>
+</div>
+<!-- Status Card -->
+<div class="w-full bg-white rounded-3xl p-6 shadow-lg border border-surface-variant mb-6 text-center transform transition-all">
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">Menunggu Host memulai permainan...</p>
+<div class="flex items-center justify-center gap-4 bg-surface-container-low p-4 rounded-2xl border border-outline-variant">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold">
+                    BK
+                </div>
+<div class="text-left">
+<p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Username Kamu</p>
+<p class="font-label-bold text-label-bold text-on-surface">Bintang_Keren99</p>
+</div>
+<div class="ml-auto">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+</div>
+</div>
+<!-- Participants Quick List (Asymmetric Layout) -->
+<div class="w-full">
+<div class="flex justify-between items-center mb-4">
+<p class="font-label-bold text-label-bold text-on-surface">Pemain Lainnya (3)</p>
+<span class="font-label-sm text-label-sm text-primary">Syncing...</span>
+</div>
+<div class="flex flex-wrap gap-3">
+<div class="px-4 py-2 bg-surface-container-highest rounded-full border border-surface-variant flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-secondary-container"></div>
+<span class="font-label-bold text-label-bold">Rara22</span>
+</div>
+<div class="px-4 py-2 bg-surface-container-highest rounded-full border border-surface-variant flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed"></div>
+<span class="font-label-bold text-label-bold">Fajar_Dev</span>
+</div>
+<div class="px-4 py-2 bg-surface-container-highest rounded-full border border-surface-variant flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary-fixed"></div>
+<span class="font-label-bold text-label-bold">Susi.Anto</span>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="w-full mt-12 grid grid-cols-1 gap-4">
+<button class="w-full h-14 bg-error-container text-on-error-container rounded-2xl font-label-bold text-label-bold flex items-center justify-center gap-2 tile-active transition-all active:scale-95">
+<span class="material-symbols-outlined">logout</span>
+                Keluar
+            </button>
+</div>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg rounded-t-xl">
+<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1">
+<span class="material-symbols-outlined" data-icon="videogame_asset" style="font-variation-settings: 'FILL' 1;">videogame_asset</span>
+<span class="font-label-sm text-label-sm">Play</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-label-sm text-label-sm">Analytics</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-sm text-label-sm">Users</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-sm text-label-sm">Settings</span>
+</div>
+</nav>
+<script>
+        // Micro-interaction for tiles rotation on mouse/touch movement
+        document.addEventListener('mousemove', (e) => {
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            const moveX = (e.clientX - centerX) / 100;
+            const moveY = (e.clientY - centerY) / 100;
+            
+            const tiles = document.querySelectorAll('.tile-shadow');
+            tiles.forEach((tile, index) => {
+                const factor = (index + 1) * 0.5;
+                tile.style.transform = `translate(${moveX * factor}px, ${moveY * factor}px) rotate(${moveX * 2}deg)`;
+            });
+        });
+
+        // Simple exit button handler
+        document.querySelector('.bg-error-container').addEventListener('click', () => {
+            if(confirm('Yakin ingin keluar dari ruang tunggu?')) {
+                console.log('User exited');
+            }
+        });
+    </script>
+    <script>
+        // Check if game started
+        setInterval(async () => {
+            try {
+                const res = await fetch('/api/game-pass');
+                const data = await res.json();
+                if (data.is_game_started) {
+                    window.location.href = 'game.html';
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        }, 3000);
+    </script>
+</body></html>
