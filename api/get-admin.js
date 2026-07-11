@@ -15,7 +15,8 @@ module.exports = async function handler(req, res) {
             )
         `);
 
-        const [rows] = await conn.execute('SELECT username FROM admin_users WHERE id = 1');
+        const result = await conn.execute('SELECT username FROM admin_users WHERE id = 1');
+        const rows = result.rows;
         
         if (rows.length > 0) {
             res.status(200).json({ username: rows[0].username });

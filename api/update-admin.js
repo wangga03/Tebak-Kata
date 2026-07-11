@@ -21,7 +21,8 @@ module.exports = async function handler(req, res) {
         `);
 
         // Check if admin exists (we assume there's only 1 admin, id=1)
-        const [rows] = await conn.execute('SELECT * FROM admin_users WHERE id = 1');
+        const result = await conn.execute('SELECT * FROM admin_users WHERE id = 1');
+        const rows = result.rows;
         
         if (rows.length > 0) {
             // Update

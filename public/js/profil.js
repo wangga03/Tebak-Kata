@@ -53,4 +53,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             btnSave.disabled = false;
         }
     });
+
+    const btnLogout = document.getElementById('btn-logout');
+    if (btnLogout) {
+        btnLogout.addEventListener('click', () => {
+            if (confirm("Apakah Anda yakin ingin logout?")) {
+                window.location.href = 'index.html';
+            }
+        });
+    }
 });
