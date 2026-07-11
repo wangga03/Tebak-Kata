@@ -187,7 +187,7 @@
                 </div>
 <div class="text-left">
 <p class="font-label-sm text-label-sm text-on-surface-variant opacity-70">Username Kamu</p>
-<p class="font-label-bold text-label-bold text-on-surface">Bintang_Keren99</p>
+<p class="font-label-bold text-label-bold text-on-surface" id="current-username">Memuat...</p>
 </div>
 <div class="ml-auto">
 <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
@@ -197,51 +197,21 @@
 <!-- Participants Quick List (Asymmetric Layout) -->
 <div class="w-full">
 <div class="flex justify-between items-center mb-4">
-<p class="font-label-bold text-label-bold text-on-surface">Pemain Lainnya (3)</p>
-<span class="font-label-sm text-label-sm text-primary">Syncing...</span>
+<p class="font-label-bold text-label-bold text-on-surface" id="others-count">Pemain Lainnya (0)</p>
+<span class="font-label-sm text-label-sm text-primary animate-pulse">Syncing...</span>
 </div>
-<div class="flex flex-wrap gap-3">
-<div class="px-4 py-2 bg-surface-container-highest rounded-full border border-surface-variant flex items-center gap-2">
-<div class="w-6 h-6 rounded-full bg-secondary-container"></div>
-<span class="font-label-bold text-label-bold">Rara22</span>
-</div>
-<div class="px-4 py-2 bg-surface-container-highest rounded-full border border-surface-variant flex items-center gap-2">
-<div class="w-6 h-6 rounded-full bg-tertiary-fixed"></div>
-<span class="font-label-bold text-label-bold">Fajar_Dev</span>
-</div>
-<div class="px-4 py-2 bg-surface-container-highest rounded-full border border-surface-variant flex items-center gap-2">
-<div class="w-6 h-6 rounded-full bg-primary-fixed"></div>
-<span class="font-label-bold text-label-bold">Susi.Anto</span>
-</div>
+<div class="flex flex-wrap gap-3" id="others-list">
 </div>
 </div>
 <!-- Action Buttons -->
 <div class="w-full mt-12 grid grid-cols-1 gap-4">
-<button class="w-full h-14 bg-error-container text-on-error-container rounded-2xl font-label-bold text-label-bold flex items-center justify-center gap-2 tile-active transition-all active:scale-95">
+<button onclick="keluarGame()" class="w-full h-14 bg-error-container text-on-error-container rounded-2xl font-label-bold text-label-bold flex items-center justify-center gap-2 tile-active transition-all active:scale-95">
 <span class="material-symbols-outlined">logout</span>
                 Keluar
             </button>
 </div>
 </main>
-<!-- Bottom Navigation Bar -->
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-4 pt-2 bg-surface-container-lowest shadow-lg rounded-t-xl">
-<div class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1">
-<span class="material-symbols-outlined" data-icon="videogame_asset" style="font-variation-settings: 'FILL' 1;">videogame_asset</span>
-<span class="font-label-sm text-label-sm">Play</span>
-</div>
-<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
-<span class="font-label-sm text-label-sm">Analytics</span>
-</div>
-<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined" data-icon="group">group</span>
-<span class="font-label-sm text-label-sm">Users</span>
-</div>
-<div class="flex flex-col items-center justify-center text-on-surface-variant p-2 hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined" data-icon="settings">settings</span>
-<span class="font-label-sm text-label-sm">Settings</span>
-</div>
-</nav>
+
 <script>
         // Micro-interaction for tiles rotation on mouse/touch movement
         document.addEventListener('mousemove', (e) => {
@@ -265,6 +235,58 @@
         });
     </script>
     <script>
+        const currentUsername = localStorage.getItem('username');
+        if (currentUsername) {
+            document.getElementById('current-username').innerText = currentUsername;
+            document.querySelector('.w-12.h-12.rounded-full').innerText = currentUsername.substring(0, 2).toUpperCase();
+        } else {
+            window.location.href = 'username.html';
+        }
+
+        async function syncParticipants() {
+            try {
+                const res = await fetch('/api/get-participants');
+                const participants = await res.json();
+                
+                const othersList = document.getElementById('others-list');
+                const othersCount = document.getElementById('others-count');
+                othersList.innerHTML = '';
+                
+                const now = new Date();
+                let count = 0;
+
+                participants.forEach(p => {
+                    if (p.username === currentUsername) return; // Skip self
+
+                    let dateStr = p.last_active;
+                    if (!dateStr.endsWith('Z')) dateStr += 'Z';
+                    const diffMins = Math.floor((now - new Date(dateStr)) / 60000);
+                    
+                    if (diffMins < 15) {
+                        count++;
+                        othersList.innerHTML += `
+                        <div class="px-4 py-2 bg-surface-container-highest rounded-full border border-surface-variant flex items-center gap-2">
+                            <div class="w-6 h-6 rounded-full bg-secondary-container flex items-center justify-center text-[10px] font-bold">${p.username.substring(0,2).toUpperCase()}</div>
+                            <span class="font-label-bold text-label-bold">${p.username}</span>
+                        </div>`;
+                    }
+                });
+                
+                othersCount.innerText = `Pemain Lainnya (${count})`;
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function keluarGame() {
+            if(currentUsername) {
+                const blob = new Blob([JSON.stringify({ username: currentUsername })], { type: 'application/json' });
+                navigator.sendBeacon('/api/remove-participant', blob);
+                localStorage.removeItem('username');
+            }
+            window.location.href = 'username.html';
+        }
+
         // Check if game started
         setInterval(async () => {
             try {
@@ -277,5 +299,8 @@
                 console.error(e);
             }
         }, 3000);
+        
+        syncParticipants();
+        setInterval(syncParticipants, 3000);
     </script>
 </body></html>

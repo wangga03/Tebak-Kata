@@ -212,8 +212,8 @@ async function registerParticipant() {
         const passRes = await fetch('/api/game-pass');
         const passData = await passRes.json();
         
-        if (!passData.is_pass_active || passData.game_pass !== gamepass) {
-            alert('Game Pass tidak valid atau sesi belum dibuka!');
+        if (passData.game_pass !== gamepass) {
+            alert('Game Pass salah!');
             btn.innerHTML = oldText;
             btn.style.pointerEvents = 'auto';
             return;
