@@ -124,22 +124,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
             participants.forEach(p => {
                 const now = new Date();
-                const lastActive = new Date(p.last_active);
+                
+                // Fix timezone by treating DB timestamp as UTC
+                let dateStr = p.last_active;
+                if (!dateStr.endsWith('Z')) dateStr += 'Z';
+                const lastActive = new Date(dateStr);
+                
                 const diffMs = now - lastActive;
                 const diffMins = Math.floor(diffMs / 60000);
                 
                 const isActive = diffMins < 15;
-                if (isActive) activeCount++;
+                if (!isActive) return; // Do not render if not active
+
+                activeCount++;
                 
-                let timeText = diffMins === 0 ? 'Baru saja' : `${diffMins}m lalu`;
-                if (diffMins > 60) {
-                    timeText = `${Math.floor(diffMins/60)}j lalu`;
-                }
+                let timeText = diffMins <= 0 ? 'Baru saja' : `${diffMins}m lalu`;
                 
                 const initials = p.username.substring(0, 2).toUpperCase();
-                const colorClass = isActive ? 'bg-primary-fixed text-primary' : 'bg-surface-variant text-on-surface-variant';
-                const statusColor = isActive ? 'text-green-500' : 'text-on-surface-variant';
-                const statusText = isActive ? 'AKTIF' : 'OFFLINE';
+                const colorClass = 'bg-primary-fixed text-primary';
+                const statusColor = 'text-green-500';
+                const statusText = 'AKTIF';
 
                 container.innerHTML += `
                     <div class="bg-surface-container-lowest p-4 rounded-xl border border-surface-variant flex items-center justify-between mb-3">
