@@ -104,15 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return div;
     }
 
-    btnTambah.addEventListener('click', () => {
-        // Tanya level menggunakan prompt sementara untuk demo
-        const lvl = prompt("Masukkan level (1: Mudah, 2: Sedang, 3: Sulit):", "1");
-        let levelNum = parseInt(lvl) || 1;
-        let levelText = levelNum === 3 ? "Sulit" : levelNum === 2 ? "Sedang" : "Mudah";
-        
-        const card = createCard(null, "", "", levelNum, levelText);
-        listContainer.prepend(card);
-    });
+    // Add button logic moved to HTML directly linking to tambah_soal.html
 
     loadQuestions();
 });
